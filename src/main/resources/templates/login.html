@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>ログインページ</title>
+</head>
+<body>
+    <h1>ログインページ</h1>
+    <div>
+        アカウントをお持ちでない場合は
+        <a href="/signup">ユーザー登録</a>
+        を行ってください。
+    </div>
+
+    <div th:if="${param.error}">
+        Invalid username and password.
+    </div>
+    <div th:if="${param.logout}">
+        You have been logged out.
+    </div>
+    <form th:method="post" th:action="@{/login}">
+        ユーザー名：<input type="text" name="username"><br>
+        パスワード：<input type="password" name="password"><br>
+        <button type="submit">ログイン</button>
+    </form>
+
+
+</body>
+</html>

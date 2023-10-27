@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>X</title>
+</head>
+<body>
+    <h1>Welcome to X</h1>
+
+    <form th:action="@{/logout}" th:method="post">
+        <input type="submit" value="ログアウト"/>
+    </form>
+    <br>
+
+    <div class="loginUser">
+        <h2>アカウント情報</h2>
+        ユーザー名：<div th:text="${loginUser.name}"></div>
+        メール　　：<div th:text="${loginUser.email}"></div>
+        説明　　　：<div th:text="${loginUser.description}"></div>
+    </div>
+
+    <form th:action="@{/setting}" th:method="get">
+        <input type="submit" value="ユーザー編集"/>
+    </form>
+
+    <div>------------</div>
+    <br>
+    <form th:action="@{/tweet}" th:method="post" th:object="${messageForm}">
+        つぶやきます<br/>
+        <div th:if="${#fields.hasErrors('text')}" th:errors="*{text}" style="color: red"></div>
+        <textarea th:field="*{text}" cols="100" rows="5" class="tweet-box"></textarea>
+        <br>
+        <input type="submit" value="つぶやく">(140文字まで)
+    </form>
+    <div>------------</div>
+    <br>
+
+    <form th:action="@{/}" th:method="get">
+        <input type="date" name="start" th:value="${start}">~
+        <input type="date" name="end" th:value="${end}">
+        <input type="submit" value="検索">
+    </form>
+    <div class="message-icon" th:each="message : ${messages}">
+        <div>+++++++++++++++</div>
+        <div>
+            投稿者 : <span th:text="${message.name}"></span>
+        </div>
+        <div class="text">
+            tweet : <span style="white-space: pre;" th:text="${message.text}"></span>
+        </div>
+        <div th:if="${#conversions.convert(loginUser.id, 'String') == message.userId}">
+            <div>
+                <form th:action="@{/editTweet}" th:method="get">
+                    <input type="hidden" name="id" th:value="${message.id}" >
+                    <input type="submit" th:value="編集" >
+                </form>
+            </div>
+            <div>
+                <form th:action="@{/deleteTweet}" th:method="post">
+                    <input type="hidden" name="id" th:value="${message.id}" >
+                    <input type="submit" th:value="削除" >
+                </form>
+            </div>
+        </div>
+        <div th:each="comment : ${comments}">
+            <div th:if="${#conversions.convert(message.id, 'String') == comment.messageId}">
+                <div>++++-------++++</div>
+                <div>
+                    投稿者 : <span th:text="${comment.name}"></span>
+                </div>
+                <div class="text">
+                    コメント : <span style="white-space: pre;" th:text="${comment.text}"></span>
+                </div>
+                <div>++++-------++++</div>
+                <div th:if="${#conversions.convert(loginUser.id, 'String') == comment.userId}">
+                    <div>
+                        <form th:action="@{/editComment}" th:method="get">
+                            <input type="hidden" name="id" th:value="${comment.id}" >
+                            <input type="submit" th:value="編集" >
+                        </form>
+                    </div>
+                    <div>
+                        <form th:action="@{/deleteComment}" th:method="post">
+                            <input type="hidden" name="id" th:value="${comment.id}" >
+                            <input type="submit" th:value="削除" >
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <form th:action="@{/comment}" th:method="post" th:object="${commentForm}">
+            <input type="hidden" name="messageId" th:value="${message.id}">
+            <div th:if="${#fields.hasErrors('text') and commentForm.messageId == #conversions.convert(message.id, 'String')}" th:errors="*{text}" style="color: red"></div>
+            <textarea name="text" th:text="${commentForm.messageId == #conversions.convert(message.id, 'String')}? ${commentForm.text}:''"
+                      cols="100" rows="5"></textarea>
+            <br>
+            <input type="submit" value="返信">(140文字まで)
+        </form>
+        <div>+++++++++++++++</div>
+        <br>
+    </div>
+</body>
+</html>

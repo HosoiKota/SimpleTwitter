@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>ユーザー登録</title>
+</head>
+<body>
+    <form th:action="@{/signup}" th:method="post" th:object="${signUpForm}">
+        <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}" style="color: red"></div>
+        ユーザー名：<input type="text" th:field="*{name}"><br/>
+        パスワード：<input type="password" th:field="*{password}"><br/>
+        <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}" style="color: red"></div>
+        メールアドレス：<input th:field="*{email}"><br/>
+        説明：<textarea cols="35" rows="5" th:field="*{description}"></textarea>
+        <br>
+        <input type="submit" th:value="登録">
+    </form>
+</body>
+</html>

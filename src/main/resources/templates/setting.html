@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>ユーザー編集</title>
+</head>
+<body>
+    <form th:action="@{/setting}" th:method="post" th:object="${userForm}">
+        <input type="hidden" th:field="*{id}"/>
+
+        <label>ユーザー名：</label>
+        <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}" style="color: red"></div>
+        <input th:field="*{name}"/>
+        <br>
+
+        <label>パスワード：</label>
+        <input type="password" th:field="*{password}"/>
+        <br>
+
+        <label>メールアドレス：</label>
+        <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}" style="color: red"></div>
+        <input th:field="*{email}"/> <br />
+
+        <label>説明：</label>
+        <textarea cols="35" rows="5" th:field="*{description}"></textarea>
+        <br>
+
+        <input type="submit" value="更新" /> <br />
+        <a href="./">戻る</a>
+    </form>
+</body>
+</html>

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>コメント編集</title>
+</head>
+<body>
+<h1>コメント編集</h1>
+<form th:action="@{/editComment}" th:method="post" th:object="${commentForm}">
+    <input type="hidden" th:field="*{id}">
+    <div th:if="${#fields.hasErrors('text')}" th:errors="*{text}" style="color: red"></div>
+    <textarea name="text" cols="100" rows="5" class="tweet-box" th:field="*{text}"></textarea>
+    <br/>
+    <input type="submit" th:value="更新">(140文字まで)
+</form>
+<a href="./">戻る</a>
+</body>
+</html>
