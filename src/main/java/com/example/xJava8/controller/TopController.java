@@ -26,12 +26,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.util.List;
 
 @Controller
+@Validated
 public class TopController {
-
-
     @Autowired
     private UserService userService;
     @Autowired
@@ -39,10 +40,12 @@ public class TopController {
     @Autowired
     private CommentService commentService;
 
-    @GetMapping("/")
-    public ModelAndView top(@AuthenticationPrincipal LoginUserDetails user,
+    @GetMapping("/home")
+    public ModelAndView home(@AuthenticationPrincipal LoginUserDetails user,
                             @RequestParam(required = false) String start, @RequestParam(required = false) String end,
                             Model model) {
+
+        List<Message> hoge = messageService.test();
 
         ModelAndView mav = new ModelAndView("top");
         List<MessageJoinUser> messages = messageService.selectAllJoinUser(start, end);
@@ -144,10 +147,10 @@ public class TopController {
         return new ModelAndView("redirect:");
     }
     @GetMapping("editTweet")
-    public ModelAndView edit(@RequestParam Integer id) {
+    public ModelAndView edit(@RequestParam(required = false) @NotNull @Pattern(regexp= "^[0-9]+$") String id) {
         ModelAndView mav = new ModelAndView("editTweet");
 
-        MessageForm messageForm = messageService.selectById(id);
+        MessageForm messageForm = messageService.selectById(Integer.valueOf(id));
         mav.addObject("messageForm", messageForm);
         return mav;
     }
