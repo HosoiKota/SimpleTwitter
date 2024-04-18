@@ -42,7 +42,7 @@ public class MessageRepository {
         StringBuilder sql = new StringBuilder();
         sql.append("SELECT ");
         sql.append("    messages.id as id, ");
-        sql.append("    messages.text as text, ");
+        sql.append("    messages.message as message, ");
         sql.append("    messages.user_id as userId, ");
         sql.append("    users.name as name, ");
         sql.append("    messages.created_date as createdDate, ");
@@ -64,10 +64,10 @@ public class MessageRepository {
         StringBuilder sql = new StringBuilder();
         sql.append("INSERT INTO messages ( ");
         sql.append("    user_id, ");
-        sql.append("    text ");
+        sql.append("    message ");
         sql.append(") VALUES ( ");
         sql.append("    :userId, ");
-        sql.append("    :text ");
+        sql.append("    :message ");
         sql.append(")");
 
         jdbc.update(sql.toString(), new BeanPropertySqlParameterSource(message));
@@ -76,7 +76,7 @@ public class MessageRepository {
     public void editTweet(Message message) {
         StringBuilder sql = new StringBuilder();
         sql.append("UPDATE messages SET ");
-        sql.append("text = :text, ");
+        sql.append("message = :message, ");
         sql.append("created_date = CURRENT_TIMESTAMP ");
         sql.append("WHERE id = :id;");
 

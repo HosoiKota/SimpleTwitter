@@ -24,7 +24,7 @@ public class CommentRepository {
         StringBuilder sql = new StringBuilder();
         sql.append("SELECT ");
         sql.append("  comments.id as id, ");
-        sql.append("  comments.text as text, ");
+        sql.append("  comments.comment as comment, ");
         sql.append("  comments.user_id as userId, ");
         sql.append("  comments.message_id as messageId, ");
         sql.append("  users.name as name, ");
@@ -50,11 +50,11 @@ public class CommentRepository {
         StringBuilder sql = new StringBuilder();
         sql.append("INSERT INTO comments ( ");
         sql.append("    user_id, ");
-        sql.append("    text, ");
+        sql.append("    comment, ");
         sql.append("    message_id ");
         sql.append(") VALUES ( ");
         sql.append("    :userId, ");
-        sql.append("    :text, ");
+        sql.append("    :comment, ");
         sql.append("    :messageId ");
         sql.append(")");
 
@@ -63,7 +63,7 @@ public class CommentRepository {
     public void update(Comment comment) {
         StringBuilder sql = new StringBuilder();
         sql.append("UPDATE comments SET ");
-        sql.append("text = :text, ");
+        sql.append("comment = :comment, ");
         sql.append("created_date = CURRENT_TIMESTAMP ");
         sql.append("WHERE id = :id;");
 

@@ -1,18 +1,20 @@
 package com.example.xJava8.entity;
 
 import lombok.Data;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.relational.core.mapping.Column;
-import org.springframework.data.relational.core.mapping.Table;
-import org.springframework.data.relational.core.sql.In;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.Date;
 
+@Entity
+@Table(name = "messages")
 @Data
 public class Message {
+    @Id
     private Integer id;
     private String userId;
-    private String text;
+    private String message;
     private Date createdDate;
     private Date updatedDate;
 }

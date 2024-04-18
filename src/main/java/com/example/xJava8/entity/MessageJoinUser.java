@@ -9,7 +9,7 @@ public class MessageJoinUser {
 
     private Integer id;
     private String userId;
-    private String text;
+    private String message;
     private Date createdDate;
     private Date updatedDate;
 

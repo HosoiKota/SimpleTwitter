@@ -7,7 +7,7 @@ import java.util.Date;
 @Data
 public class CommentJoinUser {
     private Integer id;
-    private String text;
+    private String comment;
     private String userId;
     private String messageId;
     private Date createdDate;

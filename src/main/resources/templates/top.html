@@ -3,10 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <title>X</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 <body>
     <h1>Welcome to X</h1>
 
+    <table>
+    <tr th:each="message : ${messages}">
+        <td th:text="*{message}"></td>
+        <td>2</td>
+        <td>3</td>
+    </tr>
+    </table>
+
+    <div class="alert alert-danger" role="alert" th:if="${param.error}" th:text="#{e.003}"></div>
     <form th:action="@{/logout}" th:method="post">
         <input type="submit" value="ログアウト"/>
     </form>
@@ -27,8 +37,8 @@
     <br>
     <form th:action="@{/tweet}" th:method="post" th:object="${messageForm}">
         つぶやきます<br/>
-        <div th:if="${#fields.hasErrors('text')}" th:errors="*{text}" style="color: red"></div>
-        <textarea th:field="*{text}" cols="100" rows="5" class="tweet-box"></textarea>
+        <div th:if="${#fields.hasErrors('message')}" th:errors="*{message}" style="color: red"></div>
+        <textarea th:field="*{message}" cols="100" rows="5" class="tweet-box"></textarea>
         <br>
         <input type="submit" value="つぶやく">(140文字まで)
     </form>
@@ -46,7 +56,7 @@
             投稿者 : <span th:text="${message.name}"></span>
         </div>
         <div class="text">
-            tweet : <span style="white-space: pre;" th:text="${message.text}"></span>
+            tweet : <span style="white-space: pre;" th:text="${message.message}"></span>
         </div>
         <div th:if="${#conversions.convert(loginUser.id, 'String') == message.userId}">
             <div>
@@ -69,7 +79,7 @@
                     投稿者 : <span th:text="${comment.name}"></span>
                 </div>
                 <div class="text">
-                    コメント : <span style="white-space: pre;" th:text="${comment.text}"></span>
+                    コメント : <span style="white-space: pre;" th:text="${comment.comment}"></span>
                 </div>
                 <div>++++-------++++</div>
                 <div th:if="${#conversions.convert(loginUser.id, 'String') == comment.userId}">
@@ -90,8 +100,8 @@
         </div>
         <form th:action="@{/comment}" th:method="post" th:object="${commentForm}">
             <input type="hidden" name="messageId" th:value="${message.id}">
-            <div th:if="${#fields.hasErrors('text') and commentForm.messageId == #conversions.convert(message.id, 'String')}" th:errors="*{text}" style="color: red"></div>
-            <textarea name="text" th:text="${commentForm.messageId == #conversions.convert(message.id, 'String')}? ${commentForm.text}:''"
+            <div th:if="${#fields.hasErrors('comment') and commentForm.messageId == #conversions.convert(message.id, 'String')}" th:errors="*{comment}" style="color: red"></div>
+            <textarea name="comment" th:text="${commentForm.messageId == #conversions.convert(message.id, 'String')}? ${commentForm.comment}:''"
                       cols="100" rows="5"></textarea>
             <br>
             <input type="submit" value="返信">(140文字まで)

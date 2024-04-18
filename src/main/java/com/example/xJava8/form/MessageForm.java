@@ -11,10 +11,10 @@ public class MessageForm {
 
     private Integer id;
 
-    @NotNull(message="つぶやきを入力してください")
-    @Pattern(regexp = "[^(\\s|　)]+", message="つぶやきを入力してください")
-    @Size(max = 140, message="つぶやきは140文字以内で入力してください")
-    private String text;
+    @NotNull
+    @Pattern(regexp = "^[\\s\\S]*[^(\\s|　)]+[\\s\\S]*$")
+    @Size(max = 140)
+    private String message;
 
     private String userId;
 }

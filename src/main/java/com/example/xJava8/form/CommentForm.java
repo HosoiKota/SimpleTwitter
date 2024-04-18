@@ -11,10 +11,10 @@ public class CommentForm {
 
     private Integer id;
 
-    @NotNull(message="コメントを入力してください")
-    @Pattern(regexp = "[^(\\s|　)]+", message="コメントを入力してください")
-    @Size(max = 140, message="コメントは140文字以内で入力してください")
-    private String text;
+    @NotNull
+    @Pattern(regexp = "^[\\s\\S]*[^(\\s|　)]+[\\s\\S]*$")
+    @Size(max = 140)
+    private String comment;
 
     private String userId;
     private String messageId;

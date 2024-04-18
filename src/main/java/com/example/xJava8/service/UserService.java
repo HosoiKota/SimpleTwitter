@@ -9,6 +9,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.util.List;
+
 @Service
 public class UserService {
 
@@ -24,6 +26,10 @@ public class UserService {
         User user = formToEntity(userForm);
         userRepository.userUpdate(user);
 
+    }
+
+    public List<User> selectByName(String name) {
+        return userRepository.selectByName(name);
     }
 
     private User formToEntity(SignUpForm signUpForm) {

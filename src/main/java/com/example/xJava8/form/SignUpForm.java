@@ -10,14 +10,19 @@ import javax.validation.constraints.Size;
 
 @Data
 public class SignUpForm {
-    @NotNull(message="ユーザー名を入力してください")
-    @Pattern(regexp = "[^(\\s|　)]+", message="ユーザー名を入力してください")
-    @Size(max = 20, message="コメントは20文字以内で入力してください")
+    @NotNull
+    @Pattern(regexp = "^[\\s\\S]*[^(\\s|　)]+[\\s\\S]*$")
+    @Size(max = 20)
     private String name;
-    @NotNull(message="メールアドレスを入力してください")
-    @Pattern(regexp = "[^(\\s|　)]+", message="メールアドレスを入力してください")
-    @Size(max = 50, message="メールアドレスは50文字以内で入力してください")
+    @NotNull
+    @Pattern(regexp = "^[a-zA-Z0-9.!#$%&'*+\\\\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$",
+        message = "メールアドレスのフォーマットが正しくありません。")
+    @Size(max = 50)
     private String email;
+    @NotNull
+    @Pattern(regexp = "^[\\s\\S]*[^(\\s|　)]+[\\s\\S]*$")
+    @Size(max = 20)
     private String password;
+    @Size(max = 100)
     private String description;
 }

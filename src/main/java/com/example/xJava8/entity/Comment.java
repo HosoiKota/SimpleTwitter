@@ -11,7 +11,7 @@ import java.util.Date;
 public class Comment {
 
     private Integer id;
-    private String text;
+    private String comment;
     private String userId;
     private String messageId;
     private Date createdDate;

@@ -8,8 +8,8 @@
     <h1>Tweet編集</h1>
     <form th:action="@{/editTweet}" th:method="post" th:object="${messageForm}">
         <input type="hidden" th:field="*{id}">
-        <div th:if="${#fields.hasErrors('text')}" th:errors="*{text}" style="color: red"></div>
-        <textarea name="text" cols="100" rows="5" class="tweet-box" th:field="*{text}"></textarea>
+        <div th:if="${#fields.hasErrors('message')}" th:errors="*{message}" style="color: red"></div>
+        <textarea name="message" cols="100" rows="5" class="tweet-box" th:field="*{message}"></textarea>
         <br/>
         <input type="submit" th:value="更新">(140文字まで)
     </form>

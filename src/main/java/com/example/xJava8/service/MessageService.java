@@ -3,6 +3,7 @@ package com.example.xJava8.service;
 import com.example.xJava8.entity.Message;
 import com.example.xJava8.entity.MessageJoinUser;
 import com.example.xJava8.form.MessageForm;
+import com.example.xJava8.jpa.TestRepository;
 import com.example.xJava8.repository.MessageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,14 @@ public class MessageService {
 
     @Autowired
     private MessageRepository messageRepository;
+
+    @Autowired
+    private TestRepository testRepository;
+
+    // test
+    public List<Message> test() {
+        return testRepository.findAll();
+    }
 
     public List<Message> selectAll() {
         return messageRepository.selectAll();
@@ -60,7 +69,7 @@ public class MessageService {
     private Message formToEntity(MessageForm messageForm) {
         Message message = new Message();
         message.setId(messageForm.getId());
-        message.setText(messageForm.getText());
+        message.setMessage(messageForm.getMessage());
         message.setUserId(messageForm.getUserId());
         return message;
     }
@@ -71,7 +80,7 @@ public class MessageService {
 //        }
         MessageForm form = new MessageForm();
         form.setId(message.getId());
-        form.setText(message.getText());
+        form.setMessage(message.getMessage());
         form.setUserId(message.getUserId());
         return form;
     }
