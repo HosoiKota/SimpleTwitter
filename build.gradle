@@ -17,9 +17,9 @@ configurations {
 	}
 }
 
-//bootJar {
-//	archiveFileName = 'test.jar'
-//}
+bootJar {
+	archiveFileName = 'SimpleTwitter.jar'
+}
 
 repositories {
 	mavenCentral()

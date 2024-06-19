@@ -8,14 +8,6 @@
 <body>
     <h1>Welcome to X</h1>
 
-    <table>
-    <tr th:each="message : ${messages}">
-        <td th:text="*{message}"></td>
-        <td>2</td>
-        <td>3</td>
-    </tr>
-    </table>
-
     <div class="alert alert-danger" role="alert" th:if="${param.error}" th:text="#{e.003}"></div>
     <form th:action="@{/logout}" th:method="post">
         <input type="submit" value="ログアウト"/>

@@ -13,16 +13,12 @@ import com.example.xJava8.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.core.Conventions;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
@@ -33,8 +29,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 import java.util.List;
 import java.util.Locale;
 
@@ -59,14 +53,16 @@ public class TopController {
                             Model model) {
 
         // TODO:ページング機能検証中
-        Pageable paging = PageRequest.of(0, 3);
-        Page<Message> hoge = test.findAll(paging);
+//        Pageable paging = PageRequest.of(0, 3);
+//        Page<Message> hoge = test.findAll(paging);
 
         ModelAndView mav = new ModelAndView("top");
         List<MessageJoinUser> messages = messageService.selectAllJoinUser(start, end);
         List<CommentJoinUser> comments = commentService.selectAllJoinUser();
         LoginUser loginUser = user.getLoginUser();
 
+        // RedirectAttributesを使用してformやBindingResultが送られてくるが、無い場合のみ空のformを格納するため
+        // そうしないとBindingResultが上書きされてしまう
         if (!model.containsAttribute("messageForm")) {
             mav.addObject("messageForm", new MessageForm());
         }
@@ -177,7 +173,7 @@ public class TopController {
 
         return new ModelAndView("redirect:./home");
     }
-    @GetMapping("editTweet")
+    @GetMapping("/editTweet")
     public ModelAndView edit(@RequestParam(required = false) Integer id) {
         ModelAndView mav = new ModelAndView("editTweet");
 
@@ -185,7 +181,7 @@ public class TopController {
         mav.addObject("messageForm", messageForm);
         return mav;
     }
-    @PostMapping("editTweet")
+    @PostMapping("/editTweet")
     public ModelAndView edit(@Validated @ModelAttribute MessageForm messageForm, BindingResult result) {
         if (result.hasErrors()) {
             ModelAndView mav = new ModelAndView();
@@ -200,7 +196,7 @@ public class TopController {
         messageService.delete(id);
         return new ModelAndView("redirect:./home");
     }
-    @GetMapping("editComment")
+    @GetMapping("/editComment")
     public ModelAndView editComment(@RequestParam(required = false) Integer id) {
         ModelAndView mav = new ModelAndView("editComment");
         CommentForm commentForm = commentService.selectById(id);
@@ -209,7 +205,7 @@ public class TopController {
         return mav;
     }
 
-    @PostMapping("editComment")
+    @PostMapping("/editComment")
     public ModelAndView editComment(@Validated @ModelAttribute CommentForm commentForm, BindingResult result) {
         if (result.hasErrors()) {
             ModelAndView mav = new ModelAndView();
