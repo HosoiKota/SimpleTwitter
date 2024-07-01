@@ -27,7 +27,7 @@ public class SecurityConfig {
         httpSecurity.formLogin(login -> login   // フォーム認証の設定記述開始
                 .loginProcessingUrl("/login")   // ユーザー名・パスワードの送信先URL
                 .loginPage("/login?auth")            // ログインが必要な場合にユーザーを送信するURLを指定
-                .defaultSuccessUrl("/home")     // ログイン成功後のリダイレクト先URL
+                .defaultSuccessUrl("/home", true)     // ログイン成功後のリダイレクト先URL
                 .failureUrl("/login?error")     // ログイン失敗後のリダイレクト先URL
                 .permitAll()                    // ログイン画面は未ログインでもアクセス可能
         ).logout(logout -> logout               // ログアウトの設定記述開始

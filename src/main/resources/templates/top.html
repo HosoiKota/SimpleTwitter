@@ -37,7 +37,7 @@
     <div>------------</div>
     <br>
 
-    <form th:action="@{/}" th:method="get">
+    <form th:action="@{/home}" th:method="get">
         <input type="date" name="start" th:value="${start}">~
         <input type="date" name="end" th:value="${end}">
         <input type="submit" value="検索">
@@ -47,8 +47,11 @@
         <div>
             投稿者 : <span th:text="${message.name}"></span>
         </div>
-        <div class="text">
+        <div>
             tweet : <span style="white-space: pre;" th:text="${message.message}"></span>
+        </div>
+        <div>
+            作成日 : <span th:text="${#dates.format(message.createdDate, 'yyyy/MM/dd HH:mm:ss')}"></span>
         </div>
         <div th:if="${#conversions.convert(loginUser.id, 'String') == message.userId}">
             <div>
@@ -70,8 +73,11 @@
                 <div>
                     投稿者 : <span th:text="${comment.name}"></span>
                 </div>
-                <div class="text">
+                <div>
                     コメント : <span style="white-space: pre;" th:text="${comment.comment}"></span>
+                </div>
+                <div>
+                    作成日 : <span th:text="${#dates.format(comment.createdDate, 'yyyy/MM/dd HH:mm:ss')}"></span>
                 </div>
                 <div>++++-------++++</div>
                 <div th:if="${#conversions.convert(loginUser.id, 'String') == comment.userId}">

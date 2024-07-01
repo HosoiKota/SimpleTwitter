@@ -19,6 +19,7 @@ import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
@@ -57,6 +58,12 @@ public class TopController {
 //        Page<Message> hoge = test.findAll(paging);
 
         ModelAndView mav = new ModelAndView("top");
+
+        // 仕組んだ例外
+        if (StringUtils.hasText(start) && !StringUtils.hasText(end)) {
+            throw new RuntimeException();
+        }
+
         List<MessageJoinUser> messages = messageService.selectAllJoinUser(start, end);
         List<CommentJoinUser> comments = commentService.selectAllJoinUser();
         LoginUser loginUser = user.getLoginUser();
@@ -126,18 +133,19 @@ public class TopController {
         List<User> duplicationUser = userService.selectByName(signUpForm.getName());
         if (!duplicationUser.isEmpty()) {
             FieldError fieldError = new FieldError(result.getObjectName(), "name",
+                    signUpForm.getName(), false, null, null,
                     messageSource.getMessage("e.004", null, Locale.JAPAN));
             result.addError(fieldError);
         }
 
         if (result.hasErrors()) {
-            ModelAndView mav = new ModelAndView();
+            ModelAndView mav = new ModelAndView("signup");
             mav.addObject("signUpForm", signUpForm);
-            return new ModelAndView("signup");
+            return mav;
         }
         userService.signUp(signUpForm);
 
-        return new ModelAndView("redirect:./home");
+        return new ModelAndView("redirect:./login");
     }
     @GetMapping("/setting")
     public ModelAndView setting(@AuthenticationPrincipal LoginUserDetails user) {
