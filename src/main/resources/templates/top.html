@@ -32,7 +32,7 @@
         <div th:if="${#fields.hasErrors('message')}" th:errors="*{message}" style="color: red"></div>
         <textarea th:field="*{message}" cols="100" rows="5" class="tweet-box"></textarea>
         <br>
-        <input type="submit" value="つぶやく">(140文字まで)
+        <input type="submit" value="投稿">(140文字まで)
     </form>
     <div>------------</div>
     <br>
