@@ -12,9 +12,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet"/>
     <link th:href="@{css/top.css}" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <!--<script th:src="@{/js/modal.js}"></script>!-->
     <script th:src="@{/js/cnt.js}"></script>
-    <!--<script th:src="@{/js/accordion.js}"></script> -->
 </head>
 <body>
 <div class="container-fluid max-width: 100% max-height:100%">
@@ -124,9 +122,6 @@
                                 <div class="card-body p-8">
                                     <div class="row comment_form_area">
                                         <div class="message_menu">
-                                            <!-- 使わないアコーディオン
-                                            <div class="title"></div>
-                                                !-->
                                             <div class="edit_tweet">
                                                 <form th:action="@{/editTweet}" th:method="get" name="editTweet">
                                                     <input type="hidden" name="id" th:value="${message.id}">
@@ -224,25 +219,3 @@
     <div class="col border-start overflow-hidden">
     </div>
 </div>
-    <!-- つぶやきのモーダルウィンドウ -->
-    <div id="easyModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <div class="modalClose">×</div>
-            </div>
-            <div class="modal-body">
-                <form th:action="@{/tweet}" th:method="post" th:object="${messageForm}">
-                    <div th:if="${#fields.hasErrors('message')}" th:errors="*{message}" style="color: red"></div>
-                    <textarea th:field="*{message}" cols="50" rows="10" class="tweet-box span4"></textarea>
-                    <div class="modal-footer ">
-                        <div class></div>
-                        <div class="">
-                            <input type="submit" value="Post" class="tweet-button">
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</body>
-</html>
