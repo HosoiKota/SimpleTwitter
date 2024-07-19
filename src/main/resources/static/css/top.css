@@ -1,0 +1,542 @@
+ <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet"/>
+
+body{
+	font-family:'メイリオ', 'Meiryo', sans-serif;
+}
+html, body {
+    overflow: hidden;
+    position:relative
+}
+
+.main {
+    background-color: white;
+}
+.input-date {
+  position: relative;
+  display: inline-block;
+  width: 120px;
+  height: 36px;
+  border: solid 1px rgb(219,223,224);
+  border-radius: 10px;
+}
+.input-date:hover {
+    background-color:  #E6E6E6;
+    transition: background-color 0.5s!important;
+}
+
+input[type="date"] {
+  padding: 0 10px;
+  width: 120px;
+  height: 36px;
+  border: 0;
+  background: transparent;
+  box-sizing: border-box;
+  font-size: 14px;
+  color: #999;
+}
+
+.btn {
+     color: #0F1419;
+      font-size:14px;
+      	background:rgba(255, 255, 255, 0);
+      	border-radius:100px;
+      	border: solid 1px rgb(219,223,224);
+        width: 100px;
+        height:36px;
+}
+.btn:hover {
+    background-color:  #E6E6E6;
+    transition: background-color 0.5s!important;
+}
+
+.search {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin:auto;
+  padding:16px;
+  border-bottom: solid 1px rgb(219,223,224);
+  min-width:480px;
+}
+
+.search_button {
+    margin-top:auto;
+    margin-bottom:auto;
+    width:80px;
+    font-weight:bold;
+
+}
+
+
+.modal-content {
+  background-color: white;
+  margin: 20% auto;
+  width: 50%;
+  box-shadow: 0 5px 8px 0 rgba(0,0,0,0.2),0 7px 20px 0 rgba(0,0,0,0.17);
+  animation-name: modalopen;
+  animation-duration: 1s;
+  border-radius:20px 20px 20px 20px;
+}
+
+@keyframes modalopen {
+  from {opacity: 0}
+  to {opacity: 1}
+}
+
+.modal_inner {
+	margin-top: 125px;
+	margin-bottom: 125px;
+	position: relative;
+	margin-left: auto;
+	margin-right: auto;
+	background: #fff;
+	box-shadow: 3px 4px 4px rgba(0,0,0,0.25);
+	border-radius: 13px;
+	display: block;
+	padding: 21px 8px 21px;
+	height: auto;
+}
+
+.modal_button-area {
+	max-width: 600px;
+	margin-right: auto;
+	margin-left:auto;
+	margin-top:17px;
+	padding-top: 15px;
+}
+.modal_content {
+	padding-top: 15px;
+	padding-bottom: 23px;
+}
+
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.5);
+}
+
+.modal-content {
+  background-color: white;
+  margin: 20% auto;
+  width: 50%;
+  box-shadow: 0 5px 8px 0 rgba(0,0,0,0.2),0 7px 20px 0 rgba(0,0,0,0.17);
+  animation-name: modalopen;
+  animation-duration: 1s;
+  border-radius:20px 20px 20px 20px;
+}
+
+.modal-header {
+  background: white;
+  padding: 3px 10px;
+  display: flex;
+  border-radius:20px 20px 0px 0px;
+  	display: flex;
+    justify-content: left;
+
+  & .title {
+	justify-content: center;
+	font-weight: bold;
+	}
+
+	& .modalClose {
+	    height:40px;
+	    width:40px;
+  		font-size: 2rem;
+  		border-radius: 50%;
+		text-align: center;
+    	display: flex;
+        justify-content: center;
+        align-items: center;
+
+         	}
+  & .modalClose:hover {
+  	   background-color:  #E6E6E6;
+        transition: background-color 0.5s!important;
+        border-radius: 50%;
+        cursor: pointer;
+  	}
+}
+. modal-footer{
+    height:80px !important;
+}
+
+.tweet-button {
+
+    border-color:rgba(0,0,0,0);
+	width: 70px;
+	height:36px;
+	background: rgb(29,155,240);
+	border-radius:100px;
+	font-size:15px;
+	color: white;
+	text-align: center;
+	cursor: pointer;
+	font-weight:bold;
+}
+.tweet-button:hover {
+    background-color: rgba(29, 155, 240,0.9);
+    transition: background-color 0.5s!important;
+}
+
+.post-submit {
+    text-align: right;
+}
+.tweet-box {
+    resize:none;
+    width:100%;
+    height:160px;
+    border: solid 1px rgb(219,223,224);
+    border-radius: 10px;
+}
+.retweet-box {
+    resize:none;
+    width:100%;
+    height:160px;
+    border: solid 1px rgb(219,223,224);
+    border-radius: 10px;
+}
+
+.count_circle {
+     position:relative;
+     top: 0;
+     right: 0;
+     height: 30px;
+     width: 30px;
+     transform: rotate(-90deg);
+}
+.retweet_count_circle {
+     position:relative;
+     top: 0;
+     right: 0;
+     height: 30px;
+     width: 30px;
+     transform: rotate(-90deg);
+}
+
+.count {
+ display: flex;
+ justify-content:flex-end;
+ align-items:center;
+ margin-top: 15px;
+}
+.retweet_cnt_area{
+ text-align: center;
+ width: 100px;
+ color:black;
+
+ &.cnt_danger{
+   color: red;
+ }
+ &.cnt_alert{
+    color: orange;
+ }
+}
+.cnt_area{
+ text-align: center;
+ width: 100px;
+ color:black;
+
+ &.cnt_danger{
+   color: red;
+ }
+ &.cnt_alert{
+    color: orange;
+ }
+}
+
+ input[type=text] {
+            width: 120%;
+            box-sizing: border-box;
+ }
+
+ .delete_comment {
+    display:flex;
+    text-align:center;
+    align-items:center;
+    margin-left:5px;
+    margin-right:5px;
+ }
+  .edit_comment {
+     display:flex;
+     text-align:center;
+     align-items:center;
+     margin-left:5px;
+
+  }
+
+
+
+ .delete_tweet {
+    display:flex;
+    text-align:center;
+    align-items:center;
+    margin-left:5px;
+    margin-right:5px;
+ }
+  .delete_tweet_button{
+    margin-top:auto;
+    margin-bottom:auto;
+    margin-right:3%;
+    width:80px;
+    font-weight:bold;
+  }
+ .edit_tweet {
+    display:flex;
+    text-align:center;
+    align-items:center;
+    margin-left:5px;
+    margin-right:5px;
+ }
+  .edit_tweet_button{
+    margin-top:auto;
+    margin-bottom:auto;
+    margin-right:3%;
+    width:80px;
+    font-weight:bold;
+  }
+
+  .name {
+    font-weight:bold;
+    font-size:20px;
+    color: #0F1419;
+  }
+
+  .sub {
+    font-size:15px;
+    color: #71767B;
+  }
+
+  .content {
+    font-size:15px;
+     color: #0F1419;
+     white-space:pre-line;
+     display:block;
+  }
+
+.search-area {
+    height: 15vh;
+}
+
+.flexbox{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.overflow-y::-webkit-scrollbar {
+	width: 3px;
+	height:3px;
+	background-color:rgba(0, 0, 0, 0);
+}
+.overflow-y::-webkit-scrollbar-thumb {
+  background-color: #536471;
+  border: 1px solid #536471;
+  height:30px;
+}
+
+.overflow-y-wrap {
+    height:80vh;
+}
+
+.overflow-y {
+      	overflow-x: hidden !important;
+      	overflow-y: scroll !important;
+      	height: 100%;
+}
+
+.login_user {
+    padding:3%;
+    margin-left:10px;
+    margin-top:3px;
+    margin-bottom:5px;
+    height: 25vh;
+    min-height:160px;
+    & . user_edit_button{
+           margin-top:20px;
+           margin-bottom:10px;
+           padding-bottom:10px;
+    }
+}
+
+
+
+.nav-area {
+    min-width: 300px;
+}
+
+.header {
+    height: 10vh;
+    min-height:70px;
+    display:flex;
+    justify-content:space-between;
+
+}
+
+.message_area {
+    width:90%;
+}
+/*アコーディオン全体*/
+.accordion-area{
+    list-style: none;
+    width: 96%;
+    max-width: 900px;
+    margin:0 auto;
+}
+
+
+/*アコーディオン*/
+.title {
+    position: relative;
+    cursor: pointer;
+    font-size:1rem;
+    font-weight: normal;
+    padding: 3% 3% 3% 10px;
+    transition: all .5s ease;
+    margin-right:auto;
+}
+
+/*アコーディオンボタン*/
+.title::before,
+.title::after{
+    position: absolute;
+    content:'';
+    width: 15px;
+    height: 2px;
+    font-size: 15px;
+
+}
+.title::before{
+   font: var(--fa-font-solid);
+   color:#55acee;
+   content:'\f3e5';
+  font-weight: 900;
+
+
+}
+.title::after{
+
+
+}
+/*　アコーディオンボタンクリック後の　*/
+.title.close::before{
+	  font: var(--fa-font-solid);
+      font-weight: 900;
+      content:'\f00d';
+}
+
+.title.close::after{
+
+}
+
+/*アコーディオンで現れるエリア*/
+.box {
+	margin-top: 3%;
+	margin-left: 3%;
+    padding: 3px;
+}
+
+.comment_form_area{
+    width:90%;
+}
+.each_comment {
+    border-top: solid 1px rgb(219,223,224);
+}
+.comment_area {
+    padding:16px 16px 8px 56px;
+    width:90%;
+
+    & .name {
+        font-size:18px;
+
+    }
+}
+
+.logout {
+    height:50px;
+    width:120px;
+    display:flex;
+    align-items:center;
+    margin-top:auto;
+    margin-bottom:auto;
+}
+
+.logout_button{
+    margin-top:auto;
+    margin-bottom:auto;
+    margin-right:3%;
+    width:100px;
+    font-weight:bold;
+}
+
+.message_card {
+    width:97.5%;
+    margin-left:5px;
+    margin-right:5px;
+    margin-bottom:10px;
+}
+
+.message_menu {
+    display:flex;
+    justify-content: flex-end;
+}
+
+.comment_menu {
+    display:flex;
+    justify-content: flex-end;
+    margin-right:22px;
+
+}
+
+.user_profile {
+    padding-top:8px;
+    padding-left:16px;
+    padding-right;16px;
+    padding-bottom:0px;
+}
+.tweet_area {
+        padding:3%;
+        margin-left:10px;
+        margin-top:3px;
+        margin-bottom:10px;
+        min-height:160px;
+}
+
+
+.logo {
+    width:100px;
+    font-size:50px;
+    display:flex;
+    height:60px;
+    text-align:center;
+    align-items:center;
+    margin-top:auto;
+    margin-bottom:auto;
+    margin-left:20px;
+}
+  .edit_user_button{
+    display:block;
+    position:relative;
+    font-weight:bold;
+    font-size:14px;
+    padding-top:6px;
+    width:120px;
+    margin:5px;
+    & .i {
+        display:flex;
+        align-items:center;
+        justify-content:flex-start;
+        margin-bottom:3px;
+    }
+  }
+
+.tweet{
+    font-size:20px;
+    font-weight:bold;
+    margin-bottom:10px;
+ }
