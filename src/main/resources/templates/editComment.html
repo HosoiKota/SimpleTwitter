@@ -3,16 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <title>コメント編集</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+    <link th:href="@{css/editComment.css}" rel="stylesheet">
 </head>
-<body>
-<h1>コメント編集</h1>
-<form th:action="@{/editComment}" th:method="post" th:object="${commentForm}">
-    <input type="hidden" th:field="*{id}">
-    <div th:if="${#fields.hasErrors('comment')}" th:errors="*{comment}" style="color: red"></div>
-    <textarea name="comment" cols="100" rows="5" class="tweet-box" th:field="*{comment}"></textarea>
-    <br/>
-    <input type="submit" th:value="更新">(140文字まで)
-</form>
-<a href="/home">戻る</a>
+<body class="d-flex align-items-center justify-content-center bg-light">
+    <div class="border shadow p-5">
+        <div class="border-bottom mb-5">
+            <i class="fa-brands fa-twitter"></i>
+            <span class="twitter-title fw-bold">簡易Twitter</span>
+        </div>
+        <h3 class="text-center mb-3">コメント編集</h3>
+        <form th:action="@{/editComment}" th:method="post" th:object="${commentForm}">
+            <input type="hidden" th:field="*{id}">
+            <div class="form-floating mb-4">
+                <textarea cols="50" id="comment" th:field="*{comment}" class="form-control" placeholder="コメント" style="height: 140px"></textarea>
+                <label for="comment">コメント</label>
+                <div th:if="${#fields.hasErrors('comment')}" th:errors="*{comment}" style="color: red"></div>
+            </div>
+            <button class="btn btn-primary mb-3 py-3 w-100" type="submit">更新</button>
+        </form>
+        <button class="btn btn-secondary" onclick="location.href='./home'">
+            <span>戻る</span>
+        </button>
+    </div>
 </body>
 </html>

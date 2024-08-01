@@ -372,7 +372,7 @@ input[type="date"] {
 
 .header {
     height: 10vh;
-    min-height:70px;
+    min-height:100px;
     display:flex;
     justify-content:space-between;
 
@@ -509,15 +509,24 @@ input[type="date"] {
 
 
 .logo {
-    width:100px;
-    font-size:50px;
+    width:500px;
+    /* font-size:50px;
     display:flex;
     height:60px;
     text-align:center;
-    align-items:center;
-    margin-top:auto;
-    margin-bottom:auto;
+    align-items:center; */
+    margin-top:10px;
+    margin-bottom:10px;
     margin-left:20px;
+}
+
+.logo span {
+    font-size: 2.0em;
+}
+
+i.fa-twitter {
+    font-size: 5.0em;
+    color: #74C0FC
 }
   .edit_user_button{
     display:block;
