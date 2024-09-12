@@ -3,10 +3,6 @@
 body{
 	font-family:'メイリオ', 'Meiryo', sans-serif;
 }
-html, body {
-    overflow: hidden;
-    position:relative
-}
 
 .main {
     background-color: white;

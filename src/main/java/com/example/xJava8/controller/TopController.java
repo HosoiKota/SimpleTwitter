@@ -59,7 +59,7 @@ public class TopController {
 
         ModelAndView mav = new ModelAndView("top");
 
-        // 仕組んだ例外
+        // 仕組んだ例外:検索時に開始日のみ入力がない場合は例外を出すようにしている。
         if (StringUtils.hasText(start) && !StringUtils.hasText(end)) {
             throw new RuntimeException();
         }
