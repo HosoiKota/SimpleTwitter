@@ -1,6 +1,7 @@
 package com.example.xJava8.model;
 
 import com.example.xJava8.entity.LoginUser;
+import lombok.EqualsAndHashCode;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -38,7 +39,7 @@ public class LoginUserDetails implements UserDetails {
         return loginUser.getName();
     }
 
-    // ユーz－が期限切れ出なければtrueを返す
+    // ユーザ－が期限切れ出なければtrueを返す
     @Override
     public boolean isAccountNonExpired() {
         return true;
@@ -50,7 +51,7 @@ public class LoginUserDetails implements UserDetails {
         return true;
     }
 
-    // ユーザーのパスワードが有効期限切れでなければtrueを変えs
+    // ユーザーのパスワードが有効期限切れでなければtrueを返す
     @Override
     public boolean isCredentialsNonExpired() {
         return true;
@@ -60,5 +61,27 @@ public class LoginUserDetails implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) { // 引数で渡されたオブジェクトがこのオブジェクト自身であった場合true
+            return true;
+        }
+
+        if (!(obj instanceof LoginUserDetails)) { // 引数で渡されたオブジェクトが、Userクラスのオブジェクト
+            return false;               // では無い場合はfalse。
+        }
+
+        LoginUserDetails otherUser = (LoginUserDetails) obj;
+        if (this.getLoginUser().getId() == otherUser.getLoginUser().getId()) { // IDの値を比較し、等しければtrue、等しくなければfalse。
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return this.getLoginUser().getId();
     }
 }

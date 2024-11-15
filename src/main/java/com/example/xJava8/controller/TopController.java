@@ -6,6 +6,7 @@ import com.example.xJava8.form.MessageForm;
 import com.example.xJava8.form.SignUpForm;
 import com.example.xJava8.form.UserForm;
 import com.example.xJava8.jpa.TestRepository;
+import com.example.xJava8.lisner.CustomSessionListener;
 import com.example.xJava8.model.LoginUserDetails;
 import com.example.xJava8.service.CommentService;
 import com.example.xJava8.service.MessageService;
@@ -47,6 +48,8 @@ public class TopController {
 
     @Autowired
     private TestRepository test;
+//    @Autowired
+//    private CustomSessionListener listener;
 
     @GetMapping("/home")
     public ModelAndView home(@AuthenticationPrincipal LoginUserDetails user,
@@ -56,6 +59,9 @@ public class TopController {
         // TODO:ページング機能検証中
 //        Pageable paging = PageRequest.of(0, 3);
 //        Page<Message> hoge = test.findAll(paging);
+
+        // TODO:多重ログイン検証
+//        System.out.println("DEBUG:セッション数は" + listener.getActiveSessions());
 
         ModelAndView mav = new ModelAndView("top");
 

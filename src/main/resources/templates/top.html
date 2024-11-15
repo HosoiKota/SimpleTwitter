@@ -15,8 +15,8 @@
     <script th:src="@{/js/cnt.js}"></script>
 </head>
 <body>
-<div class="container-fluid max-width: 100% max-height:100%">
-    <div class="row border-bottom header">
+<div class="container-fluid">
+    <div class="row header flex-nowrap">
         <div class="logo">
             <i class="fa-brands fa-twitter"></i>
             <span class="fw-bold">簡易Twitter</span>
@@ -31,56 +31,53 @@
         </div>
     </div>
 </div>
-<div class="row main" style="display:flex; flex-wrap:nowrap;">
-    <div class="col-4 border-end nav-area">
-        <div class="nav w-100">
-            <div class="p-8 m-10 w-100">
-                <div class="login_user card w-100" style="width:18rem;">
-                    <div class="card-body w-100 user_profile">
-                        <div th:text="${loginUser.name}" class="name"></div>
-                        <div th:text="${loginUser.email}" class="sub"></div>
-                        <div th:text="${loginUser.description}" class="content"></div>
-                        <div class="user_edit_button">
-                            <form th:action="@{/setting}" th:method="get" name="setting">
-                                <button type="submit" class="edit_user_button btn">
-                                    <i class="fa-solid fa-gear fa-lg" style="color: #55acee;"></i>
-                                    ユーザー編集
-                                </button>
-                            </form>
-                        </div>
-                    </div>
+<div class="container-fluid">
+<div class="row flex-nowrap">
+    <div class="col-4 nav-area">
+        <div class="card w-100">
+            <div class="card-body w-100 user_profile">
+                <div th:text="${loginUser.name}" class="name"></div>
+                <div th:text="${loginUser.email}" class="sub"></div>
+                <div th:text="${loginUser.description}" class="content"></div>
+                <div class="user_edit_button">
+                    <form th:action="@{/setting}" th:method="get" name="setting">
+                        <button type="submit" class="edit_user_button btn">
+                            <i class="fa-solid fa-gear fa-lg" style="color: #55acee;"></i>
+                            ユーザー編集
+                        </button>
+                    </form>
                 </div>
-            </div>
-            <div class="p-8 m-10 w-100">
-                <div class="tweet_area card w-100" style="width:18rem;">
-                    <div class="card-body p-8 w-100">
-                        <form th:action="@{/tweet}" th:method="post" th:object="${messageForm}">
-                            <span class="tweet">つぶやきます</span>
-                            <textarea th:field="*{message}" cols="50" rows="10" class="tweet-box span4"></textarea>
-                            <div th:if="${#fields.hasErrors('message')}" th:errors="*{message}" style="color: red"></div>
-                            <div class="post-submit">
-                                <div class="count">
-                                    <div class="count_circle">
-                                        <svg height="100%" viewBox="0 0 20 20" width="100%" style="overflow: visible;">
-                                            <circle cx="50%" cy="50%" fill="none" stroke-width="2" r="9"
-                                                    stroke="#dbdfe0"></circle>
-                                            <circle id="circle" cx="50%" cy="50%" fill="none" stroke-width="2" r="9"
-                                                    stroke="#1D9BF0" stroke-linecap="round"
-                                                    style="stroke-dashoffset: 56.3; stroke-dasharray: 56.5;"></circle>
-                                        </svg>
-                                    </div>
-                                    <div class="cnt_area"><span class="now_cnt">0</span> / 140</div>
-                                    <input type="submit" value="投稿" class="tweet-button">
-                                </div>
-                            </div>
-                        </form>
-                    </div>
+                <div class="alert alert-warning" role="alert">
+                    A simple warning alert—check it out!
                 </div>
             </div>
         </div>
-        <p class="mt-auto">下に表示される文字</p>
+        <div class="card w-100">
+            <div class="card-body p-8 w-100">
+                <form th:action="@{/tweet}" th:method="post" th:object="${messageForm}">
+                    <span class="tweet">つぶやきます</span>
+                    <textarea th:field="*{message}" cols="50" rows="10" class="tweet-box span4"></textarea>
+                    <div th:if="${#fields.hasErrors('message')}" th:errors="*{message}" style="color: red"></div>
+                    <div class="post-submit">
+                        <div class="count">
+                            <div class="count_circle">
+                                <svg height="100%" viewBox="0 0 20 20" width="100%" style="overflow: visible;">
+                                    <circle cx="50%" cy="50%" fill="none" stroke-width="2" r="9"
+                                            stroke="#dbdfe0"></circle>
+                                    <circle id="circle" cx="50%" cy="50%" fill="none" stroke-width="2" r="9"
+                                            stroke="#1D9BF0" stroke-linecap="round"
+                                            style="stroke-dashoffset: 56.3; stroke-dasharray: 56.5;"></circle>
+                                </svg>
+                            </div>
+                            <div class="cnt_area"><span class="now_cnt">0</span> / 140</div>
+                            <input type="submit" value="投稿" class="tweet-button">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
-    <div class="col-8" style="min-width:500px;">
+    <div class="col-8 border" style="min-width:500px;">
         <div>
             <div class="search">
                 <form th:action="@{/home}" th:method="get">
@@ -214,4 +211,5 @@
         </div>
     </div>
 <!--    <div class="col border-start overflow-hidden"></div>-->
+</div>
 </div>

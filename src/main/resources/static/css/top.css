@@ -2,11 +2,9 @@
 
 body{
 	font-family:'メイリオ', 'Meiryo', sans-serif;
+	background-color: white;
 }
 
-.main {
-    background-color: white;
-}
 .input-date {
   position: relative;
   display: inline-block;
@@ -346,22 +344,6 @@ input[type="date"] {
       	height: 100%;
 }
 
-.login_user {
-    padding:3%;
-    margin-left:10px;
-    margin-top:3px;
-    margin-bottom:5px;
-    height: 25vh;
-    min-height:160px;
-    & . user_edit_button{
-           margin-top:20px;
-           margin-bottom:10px;
-           padding-bottom:10px;
-    }
-}
-
-
-
 .nav-area {
     min-width: 300px;
 }
@@ -495,14 +477,6 @@ input[type="date"] {
     padding-right;16px;
     padding-bottom:0px;
 }
-.tweet_area {
-        padding:3%;
-        margin-left:10px;
-        margin-top:3px;
-        margin-bottom:10px;
-        min-height:160px;
-}
-
 
 .logo {
     width:500px;
