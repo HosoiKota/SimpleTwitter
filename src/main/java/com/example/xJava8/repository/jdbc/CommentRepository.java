@@ -1,9 +1,7 @@
-package com.example.xJava8.repository;
+package com.example.xJava8.repository.jdbc;
 
 import com.example.xJava8.entity.Comment;
 import com.example.xJava8.entity.CommentJoinUser;
-import com.example.xJava8.entity.Message;
-import com.example.xJava8.entity.MessageJoinUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;

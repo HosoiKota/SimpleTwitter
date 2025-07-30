@@ -29,7 +29,7 @@ input[type="date"] {
   color: #999;
 }
 
-.btn {
+.btnCustom {
      color: #0F1419;
       font-size:14px;
       	background:rgba(255, 255, 255, 0);
@@ -38,7 +38,7 @@ input[type="date"] {
         width: 100px;
         height:36px;
 }
-.btn:hover {
+.btnCustom:hover {
     background-color:  #E6E6E6;
     transition: background-color 0.5s!important;
 }
@@ -61,8 +61,7 @@ input[type="date"] {
 
 }
 
-
-.modal-content {
+/*.modal-content {
   background-color: white;
   margin: 20% auto;
   width: 50%;
@@ -159,7 +158,7 @@ input[type="date"] {
 }
 . modal-footer{
     height:80px !important;
-}
+}*/
 
 .tweet-button {
 
@@ -519,3 +518,16 @@ i.fa-twitter {
     font-weight:bold;
     margin-bottom:10px;
  }
+
+ /*ページリンクの下線削除*/
+.pageLink a {
+    text-decoration:none;
+}
+
+.pageLink {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin:auto;
+  border-bottom: solid 1px rgb(219,223,224);
+}

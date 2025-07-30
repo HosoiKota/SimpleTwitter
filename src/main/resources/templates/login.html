@@ -14,16 +14,21 @@
             <span class="twitter-title fw-bold">簡易Twitter</span>
         </div>
         <h3 class="text-center mb-3">ログイン</h3>
-        <div class="alert alert-danger" role="alert" th:if="${param.error}" th:text="#{e.002}"></div>
         <div class="alert alert-info" role="alert" th:if="${param.logout}" th:text="#{i.001}"></div>
+        <div class="alert alert-info" role="alert" th:if="${param.unlockSuccess}" th:text="#{i.003}"></div>
         <div class="alert alert-danger" role="alert" th:if="${param.auth}" th:text="#{e.001}"></div>
+        <div class="alert alert-danger" role="alert" th:if="${param.error}" th:text="#{e.002}"></div>
+        <div th:if="${param.lock}">
+            <div class="alert alert-danger" role="alert" th:text="#{e.005}"></div>
+            <div class="mb-3" >アカウントロックを解除する場合は<a th:href="@{/unlock}">解除手続き</a>を行ってください。</div>
+        </div>
         <form th:method="post" th:action="@{/login}">
             <div class="form-floating mb-3">
-                <input type="text" name="username" class="form-control" id="inputName" placeholder="ユーザー名">
+                <input type="text" name="username" class="form-control" id="inputName">
                 <label for="inputName">ユーザー名</label>
             </div>
             <div class="form-floating mb-4">
-                <input type="password" name="password" class="form-control" id="inputPassword" placeholder="パスワード">
+                <input type="password" name="password" class="form-control" id="inputPassword">
                 <label for="inputPassword">パスワード</label>
             </div>
             <button class="btn btn-primary mb-3 py-3 w-100" type="submit">ログイン</button>

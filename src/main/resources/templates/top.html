@@ -3,17 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <title>X</title>
-    <link th:href="@{css/top.css}" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"/>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet"/>
     <link th:href="@{css/top.css}" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script th:src="@{/js/cnt.js}"></script>
+    <script th:src="@{/js/modal.js}"></script>
 </head>
+<!-- エラーダイアログ用のモーダル（id重要） -->
+<div class="modal fade" id="restrictionModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ModalLabel">アカウント凍結による機能制限</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                機能制限により操作がキャンセルされました。
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">閉じる</button>
+            </div>
+        </div>
+    </div>
+</div>
 <body>
 <div class="container-fluid">
     <div class="row header flex-nowrap">
@@ -21,10 +39,9 @@
             <i class="fa-brands fa-twitter"></i>
             <span class="fw-bold">簡易Twitter</span>
         </div>
-
         <div class="logout">
             <form th:action="@{/logout}" th:method="post" name="logout">
-                <button type="submit" class=" btn logout_button">
+                <button type="submit" class=" btnCustom logout_button">
                     <i class="fa-solid fa-arrow-right-from-bracket" style="color: #55acee;"></i> ログアウト
                 </button>
             </form>
@@ -40,15 +57,16 @@
                 <div th:text="${loginUser.email}" class="sub"></div>
                 <div th:text="${loginUser.description}" class="content"></div>
                 <div class="user_edit_button">
-                    <form th:action="@{/setting}" th:method="get" name="setting">
-                        <button type="submit" class="edit_user_button btn">
+                    <form th:action="@{/editUser}" th:method="get" name="setting">
+                        <button type="submit" class="edit_user_button btnCustom">
                             <i class="fa-solid fa-gear fa-lg" style="color: #55acee;"></i>
                             ユーザー編集
                         </button>
                     </form>
                 </div>
-                <div class="alert alert-warning" role="alert">
-                    A simple warning alert—check it out!
+                <div class="alert alert-warning" role="alert" th:if="${loginUser.ngCount >= 5}">
+                    <div th:text="#{w.001}" ></div>
+                    <div>凍結を解除する場合は<a th:href="@{/unlock}">解除手続き</a>を行ってください。</div>
                 </div>
             </div>
         </div>
@@ -83,15 +101,33 @@
                 <form th:action="@{/home}" th:method="get">
                     <label class="input-date"><input type="date" name="start" th:value="${start}"></label> ~
                     <label class="input-date"><input type="date" name="end" th:value="${end}"></label>
-                    <button type="submit" class="search_button btn">
+                    <button type="submit" class="search_button btnCustom">
                         <i class="fa-solid fa-magnifying-glass" style="color: #55acee;"></i> 検索
                     </button>
                 </form>
             </div>
+            <div class='pageLink'>
+                <ul class="m-0 py-1">
+                    <li th:class="${page.first} ? 'disabled':''" style="display:inline">
+                        <span th:if="${page.first}">←先頭</span>
+                        <a th:if="${not page.first}" th:href="@{./home(page=0)}">←先頭</a>
+                    </li>
+                    <li th:each='i : ${#numbers.sequence(0, page.totalPages-1)}' class="(${i}==${page.number})? 'active' : ''" style="display:inline">
+                        <span th:if='${i}==${page.number}' th:text='${i+1}'></span>
+                        <a th:if='${i}!=${page.number}' th:href="@{./home(page=${i})}">
+                            <span th:text='${i+1}'></span>
+                        </a>
+                    </li>
+                    <li class="${page.last} ? 'disabled':''" style="display:inline">
+                        <span th:if="${page.last}">末尾➝</span>
+                        <a th:if="${not page.last}" th:href="@{./home(page=(${page.totalPages}-1))}">末尾➝</a>
+                    </li>
+                </ul>
+            </div>
         </div>
         <div class="overflow-y-wrap p-1" style="min-width:480px;">
             <div class="overflow-y">
-                <div class="message-icon row " th:each="message,state  : ${messages}">
+                <div class="message-icon row " th:each="message : ${messages}">
                     <div class="col-12">
                         <div class="row message_card">
                             <div class="card">
@@ -103,16 +139,6 @@
                                         <span th:text="${message.message}" class="content"></span>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-2">
-                                    </div>
-                                    <div class="col-5">
-                                    </div>
-                                    <!--<div th:if="${#conversions.convert(loginUser.id, 'String') == message.userId}">!-->
-
-
-                                    <!--</div>!-->
-                                </div>
                                 <div class="card-body p-8">
                                     <div class="row comment_form_area">
                                         <div class="message_menu">
@@ -121,7 +147,7 @@
                                                     <input type="hidden" name="id" th:value="${message.id}">
                                                     <th:block
                                                             th:if="${#conversions.convert(loginUser.id, 'String') == message.userId}">
-                                                        <button type="submit" class="edit_tweet_button btn">
+                                                        <button type="submit" class="edit_tweet_button btnCustom">
                                                             <i class="fa-regular fa-pen-to-square"
                                                                style="color: #55acee;"></i> 編集
                                                         </button>
@@ -133,7 +159,7 @@
                                                     <input type="hidden" name="id" th:value="${message.id}">
                                                     <th:block
                                                             th:if="${#conversions.convert(loginUser.id, 'String') == message.userId}">
-                                                        <button type="submit" class="delete_tweet_button btn">
+                                                        <button type="submit" class="delete_tweet_button btnCustom">
                                                             <i class="fa-regular fa-trash-can"
                                                                style="color: #55acee;"></i> 削除
                                                         </button>
@@ -182,7 +208,7 @@
                                                         <div class="edit_comment">
                                                             <form th:action="@{/editComment}" th:method="get">
                                                                 <input type="hidden" name="id" th:value="${comment.id}">
-                                                                <button type="submit" class="edit_tweet_button btn">
+                                                                <button type="submit" class="edit_tweet_button btnCustom">
                                                                     <i class="fa-regular fa-pen-to-square"
                                                                        style="color: #55acee;"></i> 編集
                                                                 </button>
@@ -191,7 +217,7 @@
                                                         <div class="delete_comment">
                                                             <form th:action="@{/deleteComment}" th:method="post">
                                                                 <input type="hidden" name="id" th:value="${comment.id}">
-                                                                <button type="submit" class="delete_tweet_button btn">
+                                                                <button type="submit" class="delete_tweet_button btnCustom">
                                                                     <i class="fa-regular fa-trash-can" style="color: #55acee;"></i> 削除
                                                                 </button>
                                                             </form>
@@ -206,10 +232,9 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
-<!--    <div class="col border-start overflow-hidden"></div>-->
 </div>
 </div>
+</body>

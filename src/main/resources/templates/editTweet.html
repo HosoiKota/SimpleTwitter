@@ -17,7 +17,7 @@
         <form th:action="@{/editTweet}" th:method="post" th:object="${messageForm}">
             <input type="hidden" th:field="*{id}">
             <div class="form-floating mb-4">
-                <textarea cols="50" id="message" th:field="*{message}" class="form-control" placeholder="つぶやき" style="height: 140px"></textarea>
+                <textarea cols="50" id="message" th:field="*{message}" class="form-control" style="height: 140px"></textarea>
                 <label for="message">つぶやき</label>
                 <div th:if="${#fields.hasErrors('message')}" th:errors="*{message}" style="color: red"></div>
             </div>

@@ -1,4 +1,4 @@
-package com.example.xJava8.repository;
+package com.example.xJava8.repository.jdbc;
 
 import com.example.xJava8.entity.Message;
 import com.example.xJava8.entity.MessageJoinUser;

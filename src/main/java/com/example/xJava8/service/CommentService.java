@@ -3,7 +3,7 @@ package com.example.xJava8.service;
 import com.example.xJava8.entity.Comment;
 import com.example.xJava8.entity.CommentJoinUser;
 import com.example.xJava8.form.CommentForm;
-import com.example.xJava8.repository.CommentRepository;
+import com.example.xJava8.repository.jdbc.CommentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

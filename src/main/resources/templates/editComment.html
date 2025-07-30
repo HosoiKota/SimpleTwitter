@@ -17,7 +17,7 @@
         <form th:action="@{/editComment}" th:method="post" th:object="${commentForm}">
             <input type="hidden" th:field="*{id}">
             <div class="form-floating mb-4">
-                <textarea cols="50" id="comment" th:field="*{comment}" class="form-control" placeholder="コメント" style="height: 140px"></textarea>
+                <textarea cols="50" id="comment" th:field="*{comment}" class="form-control" style="height: 140px"></textarea>
                 <label for="comment">コメント</label>
                 <div th:if="${#fields.hasErrors('comment')}" th:errors="*{comment}" style="color: red"></div>
             </div>

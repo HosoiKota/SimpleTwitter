@@ -1,13 +1,10 @@
-package com.example.xJava8.repository;
+package com.example.xJava8.repository.jdbc;
 
-import com.example.xJava8.entity.Message;
-import com.example.xJava8.entity.MessageJoinUser;
 import com.example.xJava8.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 
@@ -50,6 +47,32 @@ public class UserRepository {
         Map<String, Object> param = new HashMap<>();
         param.put("name", name);
         return jdbc.query(sql.toString(), param, new BeanPropertyRowMapper<User>(User.class));
+    }
+
+    // Ngワードカウントアップ
+    public void updateNgCount(Integer id) {
+        StringBuilder sql = new StringBuilder();
+        sql.append("UPDATE users SET ");
+        sql.append("   ng_count = ng_count + 1 ");
+        sql.append("WHERE id = :id");
+
+        Map<String, Object> param = new HashMap<>();
+        param.put("id", id);
+
+        jdbc.update(sql.toString(), param);
+    }
+
+    // NGワードカウントリセット
+    public void resetNgCount(Integer id) {
+        StringBuilder sql = new StringBuilder();
+        sql.append("UPDATE users SET ");
+        sql.append("   ng_count = 0 ");
+        sql.append("WHERE id = :id");
+
+        Map<String, Object> param = new HashMap<>();
+        param.put("id", id);
+
+        jdbc.update(sql.toString(), param);
     }
 
 }

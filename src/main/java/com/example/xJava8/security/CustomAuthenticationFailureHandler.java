@@ -6,6 +6,7 @@ import org.springframework.security.authentication.LockedException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -23,17 +24,18 @@ import java.io.IOException;
  * CredentialsExpiredException	UserDetails.isCredentialsNonExpired() が false を返した
  * SessionAuthenticationException	セッション数が上限を超えた場合など（詳細後日）
  */
-public class CustomAuthenticationFailureHandler implements AuthenticationFailureHandler {
+public class CustomAuthenticationFailureHandler extends SimpleUrlAuthenticationFailureHandler {
     @Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
 
         if (exception instanceof LockedException) {
             // アカウントロック判定
-
             // アカウントロック解消への画面に誘導したい。
-            response.sendRedirect("./login?error");
+            setDefaultFailureUrl("/login?lock");
         } else {
-            response.sendRedirect("./login?error");
+            setDefaultFailureUrl("/login?error");
         }
+
+        super.onAuthenticationFailure(request, response, exception);
     }
 }

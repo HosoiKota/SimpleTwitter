@@ -3,8 +3,7 @@ package com.example.xJava8.service;
 import com.example.xJava8.entity.Message;
 import com.example.xJava8.entity.MessageJoinUser;
 import com.example.xJava8.form.MessageForm;
-import com.example.xJava8.jpa.TestRepository;
-import com.example.xJava8.repository.MessageRepository;
+import com.example.xJava8.repository.jdbc.MessageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -18,14 +17,6 @@ public class MessageService {
 
     @Autowired
     private MessageRepository messageRepository;
-
-    @Autowired
-    private TestRepository testRepository;
-
-    // test
-    public List<Message> test() {
-        return testRepository.findAll();
-    }
 
     public List<Message> selectAll() {
         return messageRepository.selectAll();

@@ -14,25 +14,25 @@
             <span class="twitter-title fw-bold">簡易Twitter</span>
         </div>
         <h3 class="text-center mb-3">ユーザー登録</h3>
-        <form th:action="@{/signup}" th:method="post" th:object="${signUpForm}">
+        <form th:action="@{/signup}" th:method="post" th:object="${userForm}">
             <div class="form-floating mb-3">
-                <input type="text" id="name" th:field="*{name}" class="form-control" placeholder="ユーザー名">
+                <input type="text" id="name" th:field="*{name}" class="form-control" >
                 <label for="name">ユーザー名</label>
                 <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}" style="color: red"></div>
             </div>
             <div class="form-floating mb-3">
-                <input type="password" id="password" th:field="*{password}" class="form-control" placeholder="パスワード">
+                <input type="password" id="password" th:field="*{password}" class="form-control" >
                 <label for="password">パスワード</label>
                 <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}" style="color: red"></div>
                 <div th:if="${#fields.hasErrors('passwordValid')}" th:errors="*{passwordValid}" style="color: red"></div>
             </div>
             <div class="form-floating mb-3">
-                <input type="text" id="email" th:field="*{email}" class="form-control" placeholder="メールアドレス">
+                <input type="text" id="email" th:field="*{email}" class="form-control" >
                 <label for="email">メールアドレス</label>
                 <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}" style="color: red"></div>
             </div>
             <div class="form-floating mb-4">
-                <textarea cols="50" id="description" th:field="*{description}" class="form-control" placeholder="説明" style="height: 140px"></textarea>
+                <textarea cols="50" id="description" th:field="*{description}" class="form-control" style="height: 140px"></textarea>
                 <label for="description">説明</label>
                 <div th:if="${#fields.hasErrors('description')}" th:errors="*{description}" style="color: red"></div>
             </div>

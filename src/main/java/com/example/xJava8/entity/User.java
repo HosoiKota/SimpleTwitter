@@ -1,19 +1,19 @@
 package com.example.xJava8.entity;
 
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.relational.core.mapping.Column;
-import org.springframework.data.relational.core.mapping.Table;
+import lombok.*;
 
+import javax.persistence.*;
 import java.util.Date;
 
-@Table("users")
-@Data
+@Entity
+@Table(name = "users")
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 public class User {
     @Id
-    @Column
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @Column
     private String name;
@@ -23,8 +23,10 @@ public class User {
     private String password;
     @Column
     private String description;
-    @Column("created_date")
+    @Column(name = "ng_count")
+    private Integer ngCount;
+    @Column(name = "created_date")
     private Date createdDate;
-    @Column("updated_date")
+    @Column(name = "updated_date")
     private Date updatedDate;
 }
