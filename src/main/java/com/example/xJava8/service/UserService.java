@@ -57,16 +57,16 @@ public class UserService {
         userRepository.resetNgCount(id);
     }
 
-//    // usersテーブル更新時にログイン情報を更新するためのメソッド
-//    private void updateSessionAuthentication(Integer id) {
-//        // 最新のユーザ情報取得
-//        LoginUserDetails loginUserDetails = new LoginUserDetails(jpaUserRepository.findById(id).orElse(null));
-//        SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(
-//                loginUserDetails,
-//                loginUserDetails.getPassword(),
-//                loginUserDetails.getAuthorities()
-//        ));
-//    }
+    // usersテーブル更新時にログイン情報を更新するためのメソッド
+    private void updateSessionAuthentication(Integer id) {
+        // 最新のユーザ情報取得
+        LoginUserDetails loginUserDetails = new LoginUserDetails(jpaUserRepository.findById(id).orElse(null));
+        SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(
+                loginUserDetails,
+                loginUserDetails.getPassword(),
+                loginUserDetails.getAuthorities()
+        ));
+    }
 
     private User formToEntity(UserForm userForm) {
         User user = new User();
