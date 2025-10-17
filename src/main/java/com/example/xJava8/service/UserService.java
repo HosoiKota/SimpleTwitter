@@ -39,6 +39,9 @@ public class UserService {
         }
         User user = formToEntity(userForm);
         userRepository.userUpdate(user);
+
+        // ログイン情報更新
+        updateSessionAuthentication(user.getId());
     }
 
     public List<User> selectByName(String name) {
@@ -50,23 +53,27 @@ public class UserService {
     }
 
     public void updateNgCount(Integer id) {
+        // NGカウントUP
         userRepository.updateNgCount(id);
+
+        // ログイン情報更新
+        updateSessionAuthentication(id);
     }
 
     public void resetNgCount(Integer id) {
         userRepository.resetNgCount(id);
     }
 
-//    // usersテーブル更新時にログイン情報を更新するためのメソッド
-//    private void updateSessionAuthentication(Integer id) {
-//        // 最新のユーザ情報取得
-//        LoginUserDetails loginUserDetails = new LoginUserDetails(jpaUserRepository.findById(id).orElse(null));
-//        SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(
-//                loginUserDetails,
-//                loginUserDetails.getPassword(),
-//                loginUserDetails.getAuthorities()
-//        ));
-//    }
+    // usersテーブル更新時にログイン情報を更新するためのメソッド
+    private void updateSessionAuthentication(Integer id) {
+        // 最新のユーザ情報取得
+        LoginUserDetails loginUserDetails = new LoginUserDetails(jpaUserRepository.findById(id).orElse(null));
+        SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(
+                loginUserDetails,
+                loginUserDetails.getPassword(),
+                loginUserDetails.getAuthorities()
+        ));
+    }
 
     private User formToEntity(UserForm userForm) {
         User user = new User();

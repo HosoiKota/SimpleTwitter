@@ -192,14 +192,6 @@ public class TopController {
         }
         userService.userUpdate(userForm);
 
-        // ログインユーザー情報の更新
-        loginUserDetails.getLoginUser().setName(userForm.getName());
-        loginUserDetails.getLoginUser().setEmail(userForm.getEmail());
-        loginUserDetails.getLoginUser().setDescription(userForm.getDescription());
-        SecurityContext context = SecurityContextHolder.getContext();
-        context.setAuthentication(new UsernamePasswordAuthenticationToken(
-                loginUserDetails, loginUserDetails.getPassword(), loginUserDetails.getAuthorities()));
-
         return new ModelAndView("redirect:./home");
     }
     @GetMapping("/editTweet")
