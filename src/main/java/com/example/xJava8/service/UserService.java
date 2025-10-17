@@ -39,6 +39,9 @@ public class UserService {
         }
         User user = formToEntity(userForm);
         userRepository.userUpdate(user);
+
+        // ログイン情報更新
+        updateSessionAuthentication(user.getId());
     }
 
     public List<User> selectByName(String name) {
@@ -50,7 +53,11 @@ public class UserService {
     }
 
     public void updateNgCount(Integer id) {
+        // NGカウントUP
         userRepository.updateNgCount(id);
+
+        // ログイン情報更新
+        updateSessionAuthentication(id);
     }
 
     public void resetNgCount(Integer id) {
