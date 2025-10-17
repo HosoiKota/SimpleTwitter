@@ -2,9 +2,13 @@ package com.example.xJava8.service;
 
 import com.example.xJava8.entity.User;
 import com.example.xJava8.form.UserForm;
+import com.example.xJava8.model.LoginUserDetails;
 import com.example.xJava8.repository.jdbc.UserRepository;
 import com.example.xJava8.repository.jpa.JpaUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -52,6 +56,17 @@ public class UserService {
     public void resetNgCount(Integer id) {
         userRepository.resetNgCount(id);
     }
+
+//    // usersテーブル更新時にログイン情報を更新するためのメソッド
+//    private void updateSessionAuthentication(Integer id) {
+//        // 最新のユーザ情報取得
+//        LoginUserDetails loginUserDetails = new LoginUserDetails(jpaUserRepository.findById(id).orElse(null));
+//        SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(
+//                loginUserDetails,
+//                loginUserDetails.getPassword(),
+//                loginUserDetails.getAuthorities()
+//        ));
+//    }
 
     private User formToEntity(UserForm userForm) {
         User user = new User();
