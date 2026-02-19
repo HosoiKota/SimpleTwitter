@@ -188,60 +188,55 @@ input[type="date"] {
     border: solid 1px rgb(219,223,224);
     border-radius: 10px;
 }
-.retweet-box {
-    resize:none;
-    width:100%;
-    height:160px;
-    border: solid 1px rgb(219,223,224);
-    border-radius: 10px;
+
+.count {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-top: 15px;
 }
 
 .count_circle {
-     position:relative;
-     top: 0;
-     right: 0;
-     height: 30px;
-     width: 30px;
-     transform: rotate(-90deg);
-}
-.retweet_count_circle {
-     position:relative;
-     top: 0;
-     right: 0;
-     height: 30px;
-     width: 30px;
-     transform: rotate(-90deg);
+    height: 30px;
+    width: 30px;
+    /* 12時の方向から開始させるために回転 */
+    transform: rotate(-90deg);
 }
 
-.count {
- display: flex;
- justify-content:flex-end;
- align-items:center;
- margin-top: 15px;
+circle {
+    fill: none;
+    /* 線の太さ */
+    stroke-width: 2;
 }
-.retweet_cnt_area{
- text-align: center;
- width: 100px;
- color:black;
 
- &.cnt_danger{
-   color: red;
- }
- &.cnt_alert{
-    color: orange;
- }
+.circle_bg {
+    stroke: #dbdfe0;
 }
+
+.circle_bar {
+    stroke: #1D9BF0;
+    stroke-linecap: round;
+    /* pathLength="100"、100進むと一周。最初は 0 100 */
+    stroke-dasharray: var(--percent, 0) 100;
+
+    &.cnt_alert {
+        stroke: orange;
+    }
+    &.cnt_danger {
+        stroke: red;
+    }
+}
+
 .cnt_area{
- text-align: center;
- width: 100px;
- color:black;
-
- &.cnt_danger{
-   color: red;
- }
- &.cnt_alert{
-    color: orange;
- }
+    text-align: center;
+    width: 100px;
+    color:black;
+    &.cnt_danger{
+        color: red;
+    }
+    &.cnt_alert{
+        color: orange;
+    }
 }
 
  input[type=text] {
@@ -263,8 +258,6 @@ input[type="date"] {
      margin-left:5px;
 
   }
-
-
 
  .delete_tweet {
     display:flex;

@@ -79,15 +79,14 @@
                     <div class="post-submit">
                         <div class="count">
                             <div class="count_circle">
-                                <svg height="100%" viewBox="0 0 20 20" width="100%" style="overflow: visible;">
-                                    <circle cx="50%" cy="50%" fill="none" stroke-width="2" r="9"
-                                            stroke="#dbdfe0"></circle>
-                                    <circle id="circle" cx="50%" cy="50%" fill="none" stroke-width="2" r="9"
-                                            stroke="#1D9BF0" stroke-linecap="round"
-                                            style="stroke-dashoffset: 56.3; stroke-dasharray: 56.5;"></circle>
+                                <svg viewBox="0 0 20 20">
+                                    <circle class="circle_bg" cx="10" cy="10" r="9"></circle>
+                                    <circle class="circle_bar" cx="10" cy="10" r="9" pathLength="100"></circle>
                                 </svg>
                             </div>
-                            <div class="cnt_area"><span class="now_cnt">0</span> / 140</div>
+                            <div class="cnt_area">
+                                <span class="now_cnt">0</span> / 140
+                            </div>
                             <input type="submit" value="投稿" class="tweet-button">
                         </div>
                     </div>
@@ -170,24 +169,21 @@
                                         <div class="box">
                                             <form th:action="@{/comment}" th:method="post" th:object="${commentForm}">
                                                 <input type="hidden" name="messageId" th:value="${message.id}">
-                                                <textarea class="span2 retweet-box" name="comment"
+                                                <textarea class="tweet-box span2" name="comment"
                                                           th:text="${commentForm.messageId == #conversions.convert(message.id, 'String')}? ${commentForm.comment}:''"
                                                           cols="50" rows="10"></textarea>
                                                 <div th:if="${#fields.hasErrors('comment') and commentForm.messageId == #conversions.convert(message.id, 'String')}"
                                                      th:errors="*{comment}" style="color: red"></div>
                                                 <div class="post-submit">
                                                     <div class="count">
-                                                        <div class="retweet_count_circle">
-                                                            <svg class="retweet_circle_svg" height="100%" viewBox="0 0 20 20" width="100%" style="overflow: visible;">
-                                                                <circle cx="50%" cy="50%" fill="none" stroke-width="2" r="9" stroke="#dbdfe0"></circle>
-                                                                <circle class="retweet_circle" cx="50%" cy="50%"
-                                                                        fill="none" stroke-width="2" r="9"
-                                                                        stroke="#1D9BF0" stroke-linecap="round"
-                                                                        style="stroke-dashoffset: 56.3; stroke-dasharray: 56.5;"></circle>
+                                                        <div class="count_circle">
+                                                            <svg viewBox="0 0 20 20">
+                                                                <circle class="circle_bg" cx="10" cy="10" r="9"></circle>
+                                                                <circle class="circle_bar" cx="10" cy="10" r="9" pathLength="100"></circle>
                                                             </svg>
                                                         </div>
-                                                        <div class="retweet_cnt_area"><span
-                                                                class="retweet_now_cnt">0</span> / 140
+                                                        <div class="cnt_area">
+                                                            <span class="now_cnt">0</span> / 140
                                                         </div>
                                                         <input type="submit" value="返信" class="tweet-button">
                                                     </div>
