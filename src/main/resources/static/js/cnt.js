@@ -1,12 +1,12 @@
 $(function(){
-    // tweet comment 入力文字数インジゲーター
+    // tweet comment 入力文字数インジケーター
     $('.tweet-box').on('input', function(){
         // 文字数を取得
         let cnt = $(this).val().length;
         let max = 140;
         let percent = Math.min((cnt / max) * 100, 100);
 
-        // 個々のインジゲーターを対象に
+        // 個々のインジケーターを対象に
         const $parent = $(this).parent();
         const $circle_bar = $parent.find('.circle_bar');
         const $now_cnt = $parent.find('.now_cnt');
