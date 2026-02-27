@@ -26,6 +26,7 @@
                 <input type="password" id="password" th:field="*{password}" class="form-control">
                 <label for="password">パスワード</label>
                 <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}" style="color: red"></div>
+                <div th:if="${#fields.hasErrors('passwordValid')}" th:errors="*{passwordValid}" style="color: red"></div>
             </div>
             <div class="form-floating mb-3">
                 <input type="text" id="email" th:field="*{email}" class="form-control">
