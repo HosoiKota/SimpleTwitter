@@ -171,7 +171,14 @@ public class TopController {
     @GetMapping("/editUser")
     public ModelAndView editUser(@AuthenticationPrincipal LoginUserDetails loginUserDetails) {
         ModelAndView mav = new ModelAndView("editUser");
-        mav.addObject("userForm", loginUserDetails.getLoginUser());
+        User loginUser = loginUserDetails.getLoginUser();
+        UserForm userForm = new UserForm();
+        userForm.setId(loginUser.getId());
+        userForm.setName(loginUser.getName());
+        userForm.setEmail(loginUser.getEmail());
+        userForm.setDescription(loginUser.getDescription());
+
+        mav.addObject("userForm", userForm);
         return mav;
     }
     @PostMapping("/editUser")
