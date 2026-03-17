@@ -171,7 +171,14 @@ public class TopController {
     @GetMapping("/editUser")
     public ModelAndView editUser(@AuthenticationPrincipal LoginUserDetails loginUserDetails) {
         ModelAndView mav = new ModelAndView("editUser");
-        mav.addObject("userForm", loginUserDetails.getLoginUser());
+        User loginUser = loginUserDetails.getLoginUser();
+        UserForm userForm = new UserForm();
+        userForm.setId(loginUser.getId());
+        userForm.setName(loginUser.getName());
+        userForm.setEmail(loginUser.getEmail());
+        userForm.setDescription(loginUser.getDescription());
+
+        mav.addObject("userForm", userForm);
         return mav;
     }
     @PostMapping("/editUser")
@@ -191,14 +198,6 @@ public class TopController {
             return new ModelAndView("editUser");
         }
         userService.userUpdate(userForm);
-
-        // ログインユーザー情報の更新
-        loginUserDetails.getLoginUser().setName(userForm.getName());
-        loginUserDetails.getLoginUser().setEmail(userForm.getEmail());
-        loginUserDetails.getLoginUser().setDescription(userForm.getDescription());
-        SecurityContext context = SecurityContextHolder.getContext();
-        context.setAuthentication(new UsernamePasswordAuthenticationToken(
-                loginUserDetails, loginUserDetails.getPassword(), loginUserDetails.getAuthorities()));
 
         return new ModelAndView("redirect:./home");
     }

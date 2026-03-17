@@ -1,0 +1,27 @@
+html, body {
+    height: 100%;
+}
+
+/*上下左右中央寄せ*/
+.flex-center {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+}
+
+.main-container {
+    width: 500px;
+}
+
+.fa-brands.fa-twitter {
+    font-size: 80px;
+    color: #74C0FC
+}
+
+textarea {
+    resize: none;
+    width: 100%;
+    height: 140px !important;
+    border: solid 1px rgb(219,223,224);
+    border-radius: 10px;
+}

@@ -2,12 +2,12 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>X</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>home画面</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"/>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet"/>
+    <link th:href="@{css/common.css}" rel="stylesheet">
     <link th:href="@{css/top.css}" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
@@ -15,7 +15,6 @@
     <script th:src="@{/js/cnt.js}"></script>
     <script th:src="@{/js/modal.js}"></script>
 </head>
-<!-- エラーダイアログ用のモーダル（id重要） -->
 <div class="modal fade" id="restrictionModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -34,14 +33,14 @@
 </div>
 <body>
 <div class="container-fluid">
-    <div class="row header flex-nowrap">
-        <div class="logo">
+    <div class="row flex-nowrap align-items-center">
+        <div class="col-4 my-3" style="min-width: 300px">
             <i class="fa-brands fa-twitter"></i>
-            <span class="fw-bold">簡易Twitter</span>
+            <span class="fs-2 fw-bold">簡易Twitter</span>
         </div>
-        <div class="logout">
+        <div class="col-8 d-flex justify-content-end" style="min-width: 500px">
             <form th:action="@{/logout}" th:method="post" name="logout">
-                <button type="submit" class=" btnCustom logout_button">
+                <button type="submit" class="util-btn">
                     <i class="fa-solid fa-arrow-right-from-bracket" style="color: #55acee;"></i> ログアウト
                 </button>
             </form>
@@ -50,15 +49,15 @@
 </div>
 <div class="container-fluid">
 <div class="row flex-nowrap">
-    <div class="col-4 nav-area">
-        <div class="card w-100">
-            <div class="card-body w-100 user_profile">
-                <div th:text="${loginUser.name}" class="name"></div>
-                <div th:text="${loginUser.email}" class="sub"></div>
+    <div class="col-4" style="min-width: 300px">
+        <div class="card">
+            <div class="card-body pb-0">
+                <div th:text="${loginUser.name}" class="fs-5 fw-bold"></div>
+                <div th:text="${loginUser.email}" class="fw-light"></div>
                 <div th:text="${loginUser.description}" class="content"></div>
-                <div class="user_edit_button">
+                <div class="my-1">
                     <form th:action="@{/editUser}" th:method="get" name="setting">
-                        <button type="submit" class="edit_user_button btnCustom">
+                        <button type="submit" class="util-btn">
                             <i class="fa-solid fa-gear fa-lg" style="color: #55acee;"></i>
                             ユーザー編集
                         </button>
@@ -73,57 +72,50 @@
         <div class="card w-100">
             <div class="card-body p-8 w-100">
                 <form th:action="@{/tweet}" th:method="post" th:object="${messageForm}">
-                    <span class="tweet">つぶやきます</span>
-                    <textarea th:field="*{message}" cols="50" rows="10" class="tweet-box span4"></textarea>
+                    <span class="fs-5 fw-bold">つぶやきます</span>
+                    <textarea th:field="*{message}" cols="50" rows="10" class="span4"></textarea>
                     <div th:if="${#fields.hasErrors('message')}" th:errors="*{message}" style="color: red"></div>
-                    <div class="post-submit">
-                        <div class="count">
-                            <div class="count_circle">
-                                <svg height="100%" viewBox="0 0 20 20" width="100%" style="overflow: visible;">
-                                    <circle cx="50%" cy="50%" fill="none" stroke-width="2" r="9"
-                                            stroke="#dbdfe0"></circle>
-                                    <circle id="circle" cx="50%" cy="50%" fill="none" stroke-width="2" r="9"
-                                            stroke="#1D9BF0" stroke-linecap="round"
-                                            style="stroke-dashoffset: 56.3; stroke-dasharray: 56.5;"></circle>
-                                </svg>
-                            </div>
-                            <div class="cnt_area"><span class="now_cnt">0</span> / 140</div>
-                            <input type="submit" value="投稿" class="tweet-button">
+                    <div class="count">
+                        <div class="count-circle">
+                            <svg width="30px" height="30px" viewBox="0 0 30 30">
+                                <circle class="circle-bg" cx="15" cy="15" r="13"></circle>
+                                <circle class="circle-bar" cx="15" cy="15" r="13" pathLength="100" transform="rotate(-90, 15, 15)"></circle>
+                            </svg>
                         </div>
+                        <div class="cnt-area">
+                            <span class="now-cnt">0</span> / 140
+                        </div>
+                        <input type="submit" value="投稿" class="tweet-button">
                     </div>
                 </form>
             </div>
         </div>
     </div>
-    <div class="col-8 border" style="min-width:500px;">
+    <div class="col-8 border" style="min-width: 500px">
         <div>
-            <div class="search">
+            <div class="flex-center p-3 border-bottom">
                 <form th:action="@{/home}" th:method="get">
                     <label class="input-date"><input type="date" name="start" th:value="${start}"></label> ~
                     <label class="input-date"><input type="date" name="end" th:value="${end}"></label>
-                    <button type="submit" class="search_button btnCustom">
+                    <button type="submit" class="util-btn">
                         <i class="fa-solid fa-magnifying-glass" style="color: #55acee;"></i> 検索
                     </button>
                 </form>
             </div>
-            <div class='pageLink'>
-                <ul class="m-0 py-1">
-                    <li th:class="${page.first} ? 'disabled':''" style="display:inline">
-                        <span th:if="${page.first}">←先頭</span>
-                        <a th:if="${not page.first}" th:href="@{./home(page=0)}">←先頭</a>
-                    </li>
-                    <li th:each='i : ${#numbers.sequence(0, page.totalPages-1)}' class="(${i}==${page.number})? 'active' : ''" style="display:inline">
-                        <span th:if='${i}==${page.number}' th:text='${i+1}'></span>
-                        <a th:if='${i}!=${page.number}' th:href="@{./home(page=${i})}">
-                            <span th:text='${i+1}'></span>
-                        </a>
-                    </li>
-                    <li class="${page.last} ? 'disabled':''" style="display:inline">
-                        <span th:if="${page.last}">末尾➝</span>
-                        <a th:if="${not page.last}" th:href="@{./home(page=(${page.totalPages}-1))}">末尾➝</a>
-                    </li>
-                </ul>
-            </div>
+            <ul class="pagination flex-center m-0 py-2 border-bottom">
+                <li class="page-item">
+                    <span class="page-link" th:if="${page.first}">←先頭</span>
+                    <a class="page-link" th:if="${not page.first}" th:href="@{./home(page=0)}">←先頭</a>
+                </li>
+                <li class="page-item" th:each='i : ${#numbers.sequence(0, page.totalPages - 1)}' th:classappend="${i == page.number} ? 'active'">
+                    <span class="page-link" th:if='${i == page.number}' th:text='${i + 1}'></span>
+                    <a class="page-link" th:if='${i != page.number}' th:href="@{./home(page=${i})}" th:text="${i + 1}"></a>
+                </li>
+                <li class="page-item">
+                    <span class="page-link" th:if="${page.last}">末尾➝</span>
+                    <a class="page-link" th:if="${not page.last}" th:href="@{./home(page=(${page.totalPages} - 1))}">末尾➝</a>
+                </li>
+            </ul>
         </div>
         <div class="overflow-y-wrap p-1" style="min-width:480px;">
             <div class="overflow-y">
@@ -133,64 +125,47 @@
                             <div class="card">
                                 <div class="card-body p-8">
                                     <div class="message_area">
-                                        <span th:text="${message.name}" class="name"></span>
+                                        <span th:text="${message.name}" class="fs-5 fw-bold"></span>
                                         <span th:text="${#dates.format(message.createdDate, 'yyyy/MM/dd HH:mm:ss')}"
-                                              class="sub"></span>
+                                              class="fw-light"></span>
                                         <span th:text="${message.message}" class="content"></span>
                                     </div>
                                 </div>
                                 <div class="card-body p-8">
                                     <div class="row comment_form_area">
-                                        <div class="message_menu">
-                                            <div class="edit_tweet">
-                                                <form th:action="@{/editTweet}" th:method="get" name="editTweet">
-                                                    <input type="hidden" name="id" th:value="${message.id}">
-                                                    <th:block
-                                                            th:if="${#conversions.convert(loginUser.id, 'String') == message.userId}">
-                                                        <button type="submit" class="edit_tweet_button btnCustom">
-                                                            <i class="fa-regular fa-pen-to-square"
-                                                               style="color: #55acee;"></i> 編集
-                                                        </button>
-                                                    </th:block>
-                                                </form>
-                                            </div>
-                                            <div class="delete-tweet">
-                                                <form th:action="@{/deleteTweet}" th:method="post" name="delete-tweet">
-                                                    <input type="hidden" name="id" th:value="${message.id}">
-                                                    <th:block
-                                                            th:if="${#conversions.convert(loginUser.id, 'String') == message.userId}">
-                                                        <button type="submit" class="delete_tweet_button btnCustom">
-                                                            <i class="fa-regular fa-trash-can"
-                                                               style="color: #55acee;"></i> 削除
-                                                        </button>
-                                                    </th:block>
-                                                </form>
-                                            </div>
+                                        <div th:if="${#conversions.convert(loginUser.id, 'String') == message.userId}" class="d-flex justify-content-end column-gap-2">
+                                            <form th:action="@{/editTweet}" th:method="get">
+                                                <input type="hidden" name="id" th:value="${message.id}">
+                                                <button type="submit" class="util-btn">
+                                                    <i class="fa-regular fa-pen-to-square" style="color: #55acee;"></i> 編集
+                                                </button>
+                                            </form>
+                                            <form th:action="@{/deleteTweet}" th:method="post">
+                                                <input type="hidden" name="id" th:value="${message.id}">
+                                                <button type="submit" class="util-btn">
+                                                    <i class="fa-regular fa-trash-can" style="color: #55acee;"></i> 削除
+                                                </button>
+                                            </form>
                                         </div>
                                         <div class="box">
                                             <form th:action="@{/comment}" th:method="post" th:object="${commentForm}">
                                                 <input type="hidden" name="messageId" th:value="${message.id}">
-                                                <textarea class="span2 retweet-box" name="comment"
+                                                <textarea class="span2" name="comment"
                                                           th:text="${commentForm.messageId == #conversions.convert(message.id, 'String')}? ${commentForm.comment}:''"
                                                           cols="50" rows="10"></textarea>
                                                 <div th:if="${#fields.hasErrors('comment') and commentForm.messageId == #conversions.convert(message.id, 'String')}"
                                                      th:errors="*{comment}" style="color: red"></div>
-                                                <div class="post-submit">
-                                                    <div class="count">
-                                                        <div class="retweet_count_circle">
-                                                            <svg class="retweet_circle_svg" height="100%" viewBox="0 0 20 20" width="100%" style="overflow: visible;">
-                                                                <circle cx="50%" cy="50%" fill="none" stroke-width="2" r="9" stroke="#dbdfe0"></circle>
-                                                                <circle class="retweet_circle" cx="50%" cy="50%"
-                                                                        fill="none" stroke-width="2" r="9"
-                                                                        stroke="#1D9BF0" stroke-linecap="round"
-                                                                        style="stroke-dashoffset: 56.3; stroke-dasharray: 56.5;"></circle>
-                                                            </svg>
-                                                        </div>
-                                                        <div class="retweet_cnt_area"><span
-                                                                class="retweet_now_cnt">0</span> / 140
-                                                        </div>
-                                                        <input type="submit" value="返信" class="tweet-button">
+                                                <div class="count">
+                                                    <div class="count-circle">
+                                                        <svg width="30px" height="30px" viewBox="0 0 30 30">
+                                                            <circle class="circle-bg" cx="15" cy="15" r="13"></circle>
+                                                            <circle class="circle-bar" cx="15" cy="15" r="13" pathLength="100" transform="rotate(-90, 15, 15)"></circle>
+                                                        </svg>
                                                     </div>
+                                                    <div class="cnt-area">
+                                                        <span class="now-cnt">0</span> / 140
+                                                    </div>
+                                                    <input type="submit" value="返信" class="tweet-button">
                                                 </div>
                                             </form>
                                         </div>
@@ -200,29 +175,23 @@
                                     <div th:if="${#conversions.convert(message.id, 'String') == comment.messageId}">
                                         <div class="each_comment">
                                             <div class="comment_area">
-                                                <span th:text="${comment.name}" class="name"></span>
-                                                <span th:text="${#dates.format(comment.createdDate, 'yyyy/MM/dd HH:mm:ss')}"　class="sub"></span>
+                                                <span th:text="${comment.name}" class="fs-5 fw-bold"></span>
+                                                <span th:text="${#dates.format(comment.createdDate, 'yyyy/MM/dd HH:mm:ss')}"　class="fw-light"></span>
                                                 <span th:text="${comment.comment}" class="content"></span>
-                                                <div th:if="${#conversions.convert(loginUser.id, 'String') == comment.userId}">
-                                                    <div class="comment_menu">
-                                                        <div class="edit_comment">
-                                                            <form th:action="@{/editComment}" th:method="get">
-                                                                <input type="hidden" name="id" th:value="${comment.id}">
-                                                                <button type="submit" class="edit_tweet_button btnCustom">
-                                                                    <i class="fa-regular fa-pen-to-square"
-                                                                       style="color: #55acee;"></i> 編集
-                                                                </button>
-                                                            </form>
-                                                        </div>
-                                                        <div class="delete_comment">
-                                                            <form th:action="@{/deleteComment}" th:method="post">
-                                                                <input type="hidden" name="id" th:value="${comment.id}">
-                                                                <button type="submit" class="delete_tweet_button btnCustom">
-                                                                    <i class="fa-regular fa-trash-can" style="color: #55acee;"></i> 削除
-                                                                </button>
-                                                            </form>
-                                                        </div>
-                                                    </div>
+                                                <div th:if="${#conversions.convert(loginUser.id, 'String') == comment.userId}" class="d-flex justify-content-end column-gap-2">
+                                                    <form th:action="@{/editComment}" th:method="get">
+                                                        <input type="hidden" name="id" th:value="${comment.id}">
+                                                        <button type="submit" class="util-btn">
+                                                            <i class="fa-regular fa-pen-to-square"
+                                                               style="color: #55acee;"></i> 編集
+                                                        </button>
+                                                    </form>
+                                                    <form th:action="@{/deleteComment}" th:method="post">
+                                                        <input type="hidden" name="id" th:value="${comment.id}">
+                                                        <button type="submit" class="util-btn">
+                                                            <i class="fa-regular fa-trash-can" style="color: #55acee;"></i> 削除
+                                                        </button>
+                                                    </form>
                                                 </div>
                                             </div>
                                         </div>
