@@ -1,192 +1,63 @@
- <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet"/>
-
-body{
+body　{
 	font-family:'メイリオ', 'Meiryo', sans-serif;
 	background-color: white;
 }
 
+/*---utility---*/
+.util-btn {
+    color: #0F1419;
+    font-size: 14px;
+    background: rgba(255, 255, 255, 0);
+    border-radius: 100px;
+    border: solid 1px rgb(219,223,224);
+    height: 36px;
+    font-weight: bold;
+    padding: 0 15px;
+
+    &:hover {
+        background-color: #E6E6E6;
+        transition: background-color 0.5s !important;
+    }
+}
+
 .input-date {
-  position: relative;
-  display: inline-block;
-  width: 120px;
-  height: 36px;
-  border: solid 1px rgb(219,223,224);
-  border-radius: 10px;
+    position: relative;
+    display: inline-block;
+    width: 120px;
+    height: 36px;
+    border: solid 1px rgb(219,223,224);
+    border-radius: 10px;
+    &:hover {
+        background-color:  #E6E6E6;
+        transition: background-color 0.5s !important;
+    }
 }
-.input-date:hover {
-    background-color:  #E6E6E6;
-    transition: background-color 0.5s!important;
-}
-
 input[type="date"] {
-  padding: 0 10px;
-  width: 120px;
-  height: 36px;
-  border: 0;
-  background: transparent;
-  box-sizing: border-box;
-  font-size: 14px;
-  color: #999;
+    padding: 0 10px;
+    width: 120px;
+    height: 36px;
+    border: 0;
+    background: transparent;
+    box-sizing: border-box;
+    font-size: 14px;
+    color: #999;
 }
-
-.btnCustom {
-     color: #0F1419;
-      font-size:14px;
-      	background:rgba(255, 255, 255, 0);
-      	border-radius:100px;
-      	border: solid 1px rgb(219,223,224);
-        width: 100px;
-        height:36px;
-}
-.btnCustom:hover {
-    background-color:  #E6E6E6;
-    transition: background-color 0.5s!important;
-}
-
-.search {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin:auto;
-  padding:16px;
-  border-bottom: solid 1px rgb(219,223,224);
-  min-width:480px;
-}
-
-.search_button {
-    margin-top:auto;
-    margin-bottom:auto;
-    width:80px;
-    font-weight:bold;
-
-}
-
-/*.modal-content {
-  background-color: white;
-  margin: 20% auto;
-  width: 50%;
-  box-shadow: 0 5px 8px 0 rgba(0,0,0,0.2),0 7px 20px 0 rgba(0,0,0,0.17);
-  animation-name: modalopen;
-  animation-duration: 1s;
-  border-radius:20px 20px 20px 20px;
-}
-
-@keyframes modalopen {
-  from {opacity: 0}
-  to {opacity: 1}
-}
-
-.modal_inner {
-	margin-top: 125px;
-	margin-bottom: 125px;
-	position: relative;
-	margin-left: auto;
-	margin-right: auto;
-	background: #fff;
-	box-shadow: 3px 4px 4px rgba(0,0,0,0.25);
-	border-radius: 13px;
-	display: block;
-	padding: 21px 8px 21px;
-	height: auto;
-}
-
-.modal_button-area {
-	max-width: 600px;
-	margin-right: auto;
-	margin-left:auto;
-	margin-top:17px;
-	padding-top: 15px;
-}
-.modal_content {
-	padding-top: 15px;
-	padding-bottom: 23px;
-}
-
-
-.modal {
-  display: none;
-  position: fixed;
-  z-index: 1;
-  left: 0;
-  top: 0;
-  height: 100%;
-  width: 100%;
-  overflow: auto;
-  background-color: rgba(0,0,0,0.5);
-}
-
-.modal-content {
-  background-color: white;
-  margin: 20% auto;
-  width: 50%;
-  box-shadow: 0 5px 8px 0 rgba(0,0,0,0.2),0 7px 20px 0 rgba(0,0,0,0.17);
-  animation-name: modalopen;
-  animation-duration: 1s;
-  border-radius:20px 20px 20px 20px;
-}
-
-.modal-header {
-  background: white;
-  padding: 3px 10px;
-  display: flex;
-  border-radius:20px 20px 0px 0px;
-  	display: flex;
-    justify-content: left;
-
-  & .title {
-	justify-content: center;
-	font-weight: bold;
-	}
-
-	& .modalClose {
-	    height:40px;
-	    width:40px;
-  		font-size: 2rem;
-  		border-radius: 50%;
-		text-align: center;
-    	display: flex;
-        justify-content: center;
-        align-items: center;
-
-         	}
-  & .modalClose:hover {
-  	   background-color:  #E6E6E6;
-        transition: background-color 0.5s!important;
-        border-radius: 50%;
-        cursor: pointer;
-  	}
-}
-. modal-footer{
-    height:80px !important;
-}*/
 
 .tweet-button {
-
-    border-color:rgba(0,0,0,0);
+    border-color: rgba(0,0,0,0);
 	width: 70px;
-	height:36px;
+	height: 36px;
 	background: rgb(29,155,240);
-	border-radius:100px;
-	font-size:15px;
+	border-radius: 100px;
 	color: white;
 	text-align: center;
 	cursor: pointer;
-	font-weight:bold;
-}
-.tweet-button:hover {
-    background-color: rgba(29, 155, 240,0.9);
-    transition: background-color 0.5s!important;
-}
+	font-weight: bold;
 
-.post-submit {
-    text-align: right;
-}
-.tweet-box {
-    resize:none;
-    width:100%;
-    height:160px;
-    border: solid 1px rgb(219,223,224);
-    border-radius: 10px;
+	&:hover {
+        background-color: rgba(29, 155, 240,0.9);
+        transition: background-color 0.5s !important;
+    }
 }
 
 .count {
@@ -195,135 +66,52 @@ input[type="date"] {
     align-items: center;
     margin-top: 15px;
 }
-
-.count_circle {
-    height: 30px;
-    width: 30px;
-    /* 12時の方向から開始させるために回転 */
-    transform: rotate(-90deg);
-}
-
 circle {
     fill: none;
-    /* 線の太さ */
-    stroke-width: 2;
+    stroke-width: 3;
 }
-
-.circle_bg {
+.circle-bg {
     stroke: #dbdfe0;
 }
-
-.circle_bar {
+.circle-bar {
     stroke: #1D9BF0;
     stroke-linecap: round;
     /* pathLength="100"、100進むと一周。最初は 0 100 */
     stroke-dasharray: var(--percent, 0) 100;
-
-    &.cnt_alert {
+    &.cnt-alert {
         stroke: orange;
     }
-    &.cnt_danger {
+    &.cnt-danger {
         stroke: red;
     }
 }
-
-.cnt_area{
+.cnt-area{
     text-align: center;
     width: 100px;
-    color:black;
-    &.cnt_danger{
-        color: red;
-    }
-    &.cnt_alert{
+    color: black;
+    &.cnt-alert {
         color: orange;
     }
+    &.cnt-danger {
+        color: red;
+    }
 }
 
- input[type=text] {
-            width: 120%;
-            box-sizing: border-box;
- }
-
- .delete_comment {
-    display:flex;
-    text-align:center;
-    align-items:center;
-    margin-left:5px;
-    margin-right:5px;
- }
-  .edit_comment {
-     display:flex;
-     text-align:center;
-     align-items:center;
-     margin-left:5px;
-
-  }
-
- .delete_tweet {
-    display:flex;
-    text-align:center;
-    align-items:center;
-    margin-left:5px;
-    margin-right:5px;
- }
-  .delete_tweet_button{
-    margin-top:auto;
-    margin-bottom:auto;
-    margin-right:3%;
-    width:80px;
-    font-weight:bold;
-  }
- .edit_tweet {
-    display:flex;
-    text-align:center;
-    align-items:center;
-    margin-left:5px;
-    margin-right:5px;
- }
-  .edit_tweet_button{
-    margin-top:auto;
-    margin-bottom:auto;
-    margin-right:3%;
-    width:80px;
-    font-weight:bold;
-  }
-
-  .name {
-    font-weight:bold;
-    font-size:20px;
-    color: #0F1419;
-  }
-
-  .sub {
-    font-size:15px;
-    color: #71767B;
-  }
-
-  .content {
-    font-size:15px;
-     color: #0F1419;
-     white-space:pre-line;
-     display:block;
-  }
-
-.search-area {
-    height: 15vh;
+.content {
+    white-space: pre-line;
+    display: block;
 }
 
-.flexbox{
-  display: flex;
-  flex-wrap: wrap;
-}
-
+/*
 .overflow-y::-webkit-scrollbar {
 	width: 3px;
 	height:3px;
 	background-color:rgba(0, 0, 0, 0);
 }
 .overflow-y::-webkit-scrollbar-thumb {
-  background-color: #536471;
-  border: 1px solid #536471;
-  height:30px;
+    background-color: #536471;
+    border: 1px solid #536471;
+    height:30px;
 }
 
 .overflow-y-wrap {
@@ -331,73 +119,59 @@ circle {
 }
 
 .overflow-y {
-      	overflow-x: hidden !important;
-      	overflow-y: scroll !important;
-      	height: 100%;
+    overflow-x: hidden !important;
+    overflow-y: scroll !important;
+    height: 100%;
 }
-
-.nav-area {
-    min-width: 300px;
-}
-
-.header {
-    height: 10vh;
-    min-height:100px;
-    display:flex;
-    justify-content:space-between;
-
-}
+*/
 
 .message_area {
     width:90%;
 }
 /*アコーディオン全体*/
-.accordion-area{
+.accordion-area {
     list-style: none;
     width: 96%;
     max-width: 900px;
     margin:0 auto;
 }
 
-
 /*アコーディオン*/
 .title {
     position: relative;
     cursor: pointer;
-    font-size:1rem;
+    font-size: 1rem;
     font-weight: normal;
     padding: 3% 3% 3% 10px;
     transition: all .5s ease;
-    margin-right:auto;
+    margin-right: auto;
 }
 
 /*アコーディオンボタン*/
 .title::before,
-.title::after{
+.title::after {
     position: absolute;
-    content:'';
+    content: '';
     width: 15px;
     height: 2px;
     font-size: 15px;
-
 }
-.title::before{
-   font: var(--fa-font-solid);
-   color:#55acee;
-   content:'\f3e5';
-  font-weight: 900;
-
-
+.title::before {
+    font: var(--fa-font-solid);
+    color: #55acee;
+    content:'\f3e5';
+    font-weight: 900;
 }
+
 .title::after{
 
 
 }
 /*　アコーディオンボタンクリック後の　*/
 .title.close::before{
-	  font: var(--fa-font-solid);
-      font-weight: 900;
-      content:'\f00d';
+    font: var(--fa-font-solid);
+    font-weight: 900;
+    content:'\f00d';
 }
 
 .title.close::after{
@@ -420,30 +194,10 @@ circle {
 .comment_area {
     padding:16px 16px 8px 56px;
     width:90%;
-
     & .name {
         font-size:18px;
-
     }
 }
-
-.logout {
-    height:50px;
-    width:120px;
-    display:flex;
-    align-items:center;
-    margin-top:auto;
-    margin-bottom:auto;
-}
-
-.logout_button{
-    margin-top:auto;
-    margin-bottom:auto;
-    margin-right:3%;
-    width:100px;
-    font-weight:bold;
-}
-
 .message_card {
     width:97.5%;
     margin-left:5px;
@@ -454,73 +208,4 @@ circle {
 .message_menu {
     display:flex;
     justify-content: flex-end;
-}
-
-.comment_menu {
-    display:flex;
-    justify-content: flex-end;
-    margin-right:22px;
-
-}
-
-.user_profile {
-    padding-top:8px;
-    padding-left:16px;
-    padding-right;16px;
-    padding-bottom:0px;
-}
-
-.logo {
-    width:500px;
-    /* font-size:50px;
-    display:flex;
-    height:60px;
-    text-align:center;
-    align-items:center; */
-    margin-top:10px;
-    margin-bottom:10px;
-    margin-left:20px;
-}
-
-.logo span {
-    font-size: 2.0em;
-}
-
-i.fa-twitter {
-    font-size: 5.0em;
-    color: #74C0FC
-}
-  .edit_user_button{
-    display:block;
-    position:relative;
-    font-weight:bold;
-    font-size:14px;
-    padding-top:6px;
-    width:120px;
-    margin:5px;
-    & .i {
-        display:flex;
-        align-items:center;
-        justify-content:flex-start;
-        margin-bottom:3px;
-    }
-  }
-
-.tweet{
-    font-size:20px;
-    font-weight:bold;
-    margin-bottom:10px;
- }
-
- /*ページリンクの下線削除*/
-.pageLink a {
-    text-decoration:none;
-}
-
-.pageLink {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin:auto;
-  border-bottom: solid 1px rgb(219,223,224);
 }

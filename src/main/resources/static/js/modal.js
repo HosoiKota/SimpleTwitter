@@ -4,5 +4,6 @@ $(window).on('load', function(){
     if (restriction != null) {
         const modal = new bootstrap.Modal(document.getElementById('restrictionModal'));
         modal.show();
+        window.history.replaceState(null, '', window.location.pathname);
     }
 });
